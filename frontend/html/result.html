@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Desalter • Optimization Results</title>
+  <link rel="stylesheet" href="/static/css/result.css" />
+</head>
+<body>
+  <!-- Top bar (you can replace with your site header) -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">D</div>
+      <span>Desalter AI</span>
+    </div>
+  </header>
+
+  <!-- Page container -->
+  <main class="page">
+    <!-- Hero section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Optimization Complete! 🎉</h1>
+        <p>Your desalting parameters have been optimized for maximum efficiency and cost savings.</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-value">-12.8%</div>
+            <div class="stat-label">Total Cost Savings</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">+6.1%</div>
+            <div class="stat-label">Efficiency Gain</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Layout -->
+    <section class="services-layout">
+      <!-- Featured Optimization Card -->
+      <div class="optimization-featured">
+        <div class="service-card optimization-theme optimization-featured-card" id="optimization-card">
+          <div class="card-visual">
+            <div class="card-icon">📈</div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Optimization</h3>
+            <div class="card-tags">
+              <span class="tag">AI-driven</span>
+              <span class="tag">Real-time</span>
+              <span class="tag featured-tag">Most Important</span>
+            </div>
+            <p class="card-description">Advanced algorithms optimize your process parameters for maximum efficiency and cost savings.</p>
+            <button class="card-cta featured-cta" onclick="activateTab('optimization')">Show Optimization results →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Services Grid -->
+      <div class="secondary-services">
+        <!-- Monitoring Card -->
+        <div class="service-card monitoring-theme" id="monitoring-card">
+          <div class="card-visual">
+            <div class="card-icon">📊</div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Monitoring</h3>
+            <div class="card-tags">
+              <span class="tag">24/7</span>
+              <span class="tag">Cloud-based</span>
+            </div>
+            <p class="card-description">Real-time monitoring of throughput, energy consumption, and quality parameters.</p>
+            <button class="card-cta" onclick="activateTab('monitoring')">View Dashboard →</button>
+          </div>
+        </div>
+
+        <!-- Prediction Card -->
+        <div class="service-card prediction-theme" id="prediction-card">
+          <div class="card-visual">
+            <div class="card-icon">🔮</div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Prediction</h3>
+            <div class="card-tags">
+              <span class="tag">ML-powered</span>
+              <span class="tag">Forecast</span>
+            </div>
+            <p class="card-description">Machine learning models predict future performance and optimize decision making.</p>
+            <button class="card-cta" onclick="activateTab('prediction')">Run Forecast →</button>
+          </div>
+        </div>
+
+        <!-- Predictive Maintenance Card -->
+        <div class="service-card maintenance-theme" id="pm-card">
+          <div class="card-visual">
+            <div class="card-icon">⚙️</div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Predictive Maintenance</h3>
+            <div class="card-tags">
+              <span class="tag">Reduce Downtime</span>
+              <span class="tag">Prevent Failures</span>
+            </div>
+            <p class="card-description">Proactively maintain assets and prevent costly downtime with AI-driven insights.</p>
+            <button class="card-cta" onclick="activateTab('pm')">Analyze Assets →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Content Panels (hidden by default) -->
+    <div class="content-panels">
+      <!-- Optimization Panel -->
+      <div id="optimization-panel" class="panel" style="display: none;">
+        <!-- Modern Hero Header -->
+        <div class="opt-hero">
+          <div class="hero-main">
+            <h1 class="opt-title">Optimization Results</h1>
+            <p class="opt-subtitle">BS&W ≤ Spec AND Salt ≤ Spec achieved</p>
+            <div class="hero-actions">
+              <button class="btn-primary-modern" id="optRerun">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                Re-run Optimization
+              </button>
+              <button class="btn-secondary-modern" id="optExport">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Export Report
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primary KPIs - Hero Style -->
+        <div class="primary-kpis">
+          <div class="kpi-hero bsw">
+            <div class="kpi-hero-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div class="kpi-hero-content">
+              <div class="kpi-hero-label">BS&W</div>
+              <div class="kpi-hero-value" id="mBSW">0.44%</div>
+              <div class="kpi-hero-sub">Within specification</div>
+            </div>
+            <div class="kpi-hero-status">
+              <div class="status-indicator success"></div>
+            </div>
+          </div>
+
+          <div class="kpi-hero salt">
+            <div class="kpi-hero-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/>
+              </svg>
+            </div>
+            <div class="kpi-hero-content">
+              <div class="kpi-hero-label">Salt Content</div>
+              <div class="kpi-hero-value" id="mSalt">0.20 PTB</div>
+              <div class="kpi-hero-sub">Within specification</div>
+            </div>
+            <div class="kpi-hero-status">
+              <div class="status-indicator success"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary Metrics Grid -->
+        <div class="secondary-metrics">
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 14.828V6.172C19 5.525 18.552 5 18 5H6c-.552 0-1 .525-1 1.172v8.656C5 15.475 5.448 16 6 16h12c.552 0 1-.525 1-1.172z"/>
+                <path d="M12 12v4M8 12v4m8-4v4"/>
+              </svg>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Flow Rate</div>
+              <div class="metric-value" id="mFlow">60,000 <span class="metric-unit">BPD</span></div>
+              <div class="metric-delta up" id="mFlowΔ">+30,000</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h.01M16 4h.01M12 2l3 3-3 3-3-3 3-3z"/>
+              </svg>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Demulsifier</div>
+              <div class="metric-value" id="mPPM">57 <span class="metric-unit">ppm</span></div>
+              <div class="metric-delta down" id="mPPMΔ">-13</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/>
+              </svg>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Temperature</div>
+              <div class="metric-value" id="mT">111 <span class="metric-unit">°C</span></div>
+              <div class="metric-delta down" id="mTΔ">-9</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Voltage</div>
+              <div class="metric-value" id="mV">28 <span class="metric-unit">kV</span></div>
+              <div class="metric-delta neutral" id="mVΔ">+0</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.59-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+              </svg>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Wash Water</div>
+              <div class="metric-value" id="mWash">3.6 <span class="metric-unit">%</span></div>
+              <div class="metric-delta up" id="mWashΔ">+1.6</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modern Controls Section -->
+        <div class="modern-controls">
+          <div class="control-group">
+            <h4 class="control-title">Axis Configuration</h4>
+            <div class="radio-group-modern">
+              <label class="radio-modern">
+                <input type="radio" name="axes" value="ppm_T" checked>
+                <span class="radio-text">ppm × Temperature</span>
+              </label>
+              <label class="radio-modern">
+                <input type="radio" name="axes" value="ppm_V">
+                <span class="radio-text">ppm × Voltage</span>
+              </label>
+              <label class="radio-modern">
+                <input type="radio" name="axes" value="wash_T">
+                <span class="radio-text">Wash × Temperature</span>
+              </label>
+              <label class="radio-modern">
+                <input type="radio" name="axes" value="wash_V">
+                <span class="radio-text">Wash × Voltage</span>
+              </label>
+              <label class="radio-modern">
+                <input type="radio" name="axes" value="flow_wash">
+                <span class="radio-text">Flow × Wash</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h4 class="control-title">Visualization Metric</h4>
+            <div class="radio-group-modern">
+              <label class="radio-modern primary">
+                <input type="radio" name="metric" value="bsw" checked>
+                <span class="radio-text">BS&W (%)</span>
+              </label>
+              <label class="radio-modern primary">
+                <input type="radio" name="metric" value="salt">
+                <span class="radio-text">Salt (PTB)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h4 class="control-title">Grid Resolution</h4>
+            <div class="slider-container">
+              <input id="resSlider" type="range" min="20" max="120" value="70" />
+              <div class="slider-value">
+                <span id="resVal">70</span>
+                <span class="slider-unit">points</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decision Map Section -->
+        <div class="decision-map-section">
+          <div class="map-header">
+            <h3 id="chartTitle">Decision Map — ppm × Temperature → BS&W</h3>
+            <div class="map-legend">
+              <div class="legend-item">
+                <div class="legend-dot recommended"></div>
+                <span>Recommended</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot baseline"></div>
+                <span>Baseline</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-line iso"></div>
+                <span>Iso-cost</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-container">
+            <div class="map-canvas-wrapper">
+              <div class="y-axis-label">Temperature (°C)</div>
+              <canvas id="decisionMap" width="980" height="320" aria-label="Decision map"></canvas>
+              <div class="x-axis-label">Demulsifier (ppm)</div>
+            </div>
+
+            <!-- Modern Colorbar -->
+            <div class="modern-colorbar">
+              <div class="colorbar-gradient"></div>
+              <div class="colorbar-ticks">
+                <span>0.4</span>
+                <span>0.8</span>
+                <span>1.2</span>
+              </div>
+              <div class="colorbar-label" id="barLabel">BS&W (%)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monitoring Panel -->
+      <div id="monitoring-panel" class="panel" style="display: none;">
+        <div class="panel-header">
+          <h2>Live Monitoring Dashboard</h2>
+          <div class="panel-actions">
+            <div class="live-dot"></div><span class="live-txt">Live</span>
+          </div>
+        </div>
+
+        <!-- Key Performance Indicators -->
+        <div class="monitoring-kpis">
+          <div class="kpi-metric">
+            <div class="metric-icon flow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 14.828V6.172C19 5.525 18.552 5 18 5H6c-.552 0-1 .525-1 1.172v8.656C5 15.475 5.448 16 6 16h12c.552 0 1-.525 1-1.172z"/>
+                <path d="M12 12v4M8 12v4m8-4v4"/>
+              </svg>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Flow Rate</div>
+              <div class="metric-value" id="flowBpd">-</div>
+              <div class="metric-unit">BPD</div>
+            </div>
+          </div>
+
+          <div class="kpi-metric">
+            <div class="metric-icon quality">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">BS&W</div>
+              <div class="metric-value" id="bswValue">-</div>
+              <div class="metric-unit">%</div>
+            </div>
+          </div>
+
+          <div class="kpi-metric">
+            <div class="metric-icon salt">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/>
+              </svg>
+            </div>
+            <div class="metric-content">
+              <div class="metric-label">Salt Content</div>
+              <div class="metric-value" id="saltPtb">-</div>
+              <div class="metric-unit">PTB</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Monitoring Cards -->
+        <div class="monitoring-grid">
+          <!-- Flow & Throughput -->
+          <div class="monitoring-card">
+            <div class="card-header">
+              <h4>Flow & Throughput</h4>
+              <div class="card-icon flow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 14.828V6.172C19 5.525 18.552 5 18 5H6c-.552 0-1 .525-1 1.172v8.656C5 15.475 5.448 16 6 16h12c.552 0 1-.525 1-1.172z"/>
+                  <path d="M12 12v4M8 12v4m8-4v4"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="metric-row">
+                <span class="metric-label">Current Flow</span>
+                <span class="metric-value" id="tpNow">-</span>
+                <span class="metric-unit">bbl/hr</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">24h Average</span>
+                <span class="metric-value" id="tpAvg">-</span>
+                <span class="metric-unit">bbl/hr</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Uptime</span>
+                <span class="metric-value uptime" id="uptime">-</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quality Parameters -->
+          <div class="monitoring-card">
+            <div class="card-header">
+              <h4>Quality Parameters</h4>
+              <div class="card-icon quality">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="metric-row">
+                <span class="metric-label">BS&W</span>
+                <span class="metric-value" id="bswDetail">-</span>
+                <span class="metric-unit">%</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Salt Content</span>
+                <span class="metric-value" id="saltDetail">-</span>
+                <span class="metric-unit">PTB</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Water Cut</span>
+                <span class="metric-value" id="qWater">-</span>
+                <span class="metric-unit">%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Process Parameters -->
+          <div class="monitoring-card">
+            <div class="card-header">
+              <h4>Process Parameters</h4>
+              <div class="card-icon process">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="metric-row">
+                <span class="metric-label">Temperature</span>
+                <span class="metric-value" id="tempValue">-</span>
+                <span class="metric-unit">°C</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Voltage</span>
+                <span class="metric-value" id="voltageValue">-</span>
+                <span class="metric-unit">kV</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Process Temp</span>
+                <span class="metric-value" id="qTemp">-</span>
+                <span class="metric-unit">°C</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chemical Parameters -->
+          <div class="monitoring-card">
+            <div class="card-header">
+              <h4>Chemical Parameters</h4>
+              <div class="card-icon chemical">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h.01M16 4h.01M12 2l3 3-3 3-3-3 3-3z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="metric-row">
+                <span class="metric-label">Demulsifier</span>
+                <span class="metric-value" id="ppmValue">-</span>
+                <span class="metric-unit">ppm</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Salt in Oil</span>
+                <span class="metric-value" id="qSalt">-</span>
+                <span class="metric-unit">PTB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Energy Consumption -->
+          <div class="monitoring-card">
+            <div class="card-header">
+              <h4>Energy Consumption</h4>
+              <div class="card-icon energy">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="metric-row">
+                <span class="metric-label">Current</span>
+                <span class="metric-value" id="enNow">-</span>
+                <span class="metric-unit">kWh</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">24h Average</span>
+                <span class="metric-value" id="enAvg">-</span>
+                <span class="metric-unit">kWh</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Peak Usage</span>
+                <span class="metric-value" id="enPeak">-</span>
+                <span class="metric-unit">kWh</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- System Status -->
+          <div class="monitoring-card status-card">
+            <div class="card-header">
+              <h4>System Status</h4>
+              <div class="card-icon status">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="status-row">
+                <span class="status-label">Overall Status</span>
+                <div class="status-indicator online">
+                  <span class="status-dot"></span>
+                  <span class="status-text">Online</span>
+                </div>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Last Update</span>
+                <span class="status-value" id="lastUpdate">Just now</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Data Quality</span>
+                <span class="status-value quality">Excellent</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advanced Options Button -->
+        <div class="advanced-options-section">
+          <button class="btn-advanced" id="toggleAdvanced" onclick="toggleAdvancedCharts()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Advanced Analytics & Charts
+            <span class="advanced-toggle-icon" id="advancedToggleIcon">+</span>
+          </button>
+        </div>
+
+        <!-- Advanced Charts Section (Hidden by default) -->
+        <div class="advanced-charts-container" id="advancedCharts" style="display: none;">
+          <div class="advanced-charts-header">
+            <h3>Targeted Relationship Charts</h3>
+            <p class="advanced-subtitle">Advanced visualizations showing parameter relationships and optimization insights</p>
+          </div>
+
+          <div class="advanced-charts-grid">
+            <!-- Chart 1: BS&W vs ppm (color=T) -->
+            <div class="advanced-chart-card">
+              <div class="chart-card-header">
+                <h4>BS&W vs ppm (Chemical Dose vs Quality)</h4>
+                <div class="chart-legend">
+                  <span class="legend-dot temp-scale"></span>
+                  <span class="legend-label">Temperature</span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart1" width="400" height="300" aria-label="BS&W vs ppm relationship"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 2: Salt vs Wash (color=Flow) -->
+            <div class="advanced-chart-card">
+              <div class="chart-card-header">
+                <h4>Salt vs Wash (Wash Efficiency)</h4>
+                <div class="chart-legend">
+                  <span class="legend-dot flow-scale"></span>
+                  <span class="legend-label">Flow Rate</span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart2" width="400" height="300" aria-label="Salt vs Wash relationship"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 3: BS&W vs Voltage (color=ppm) -->
+            <div class="advanced-chart-card">
+              <div class="chart-card-header">
+                <h4>BS&W vs Voltage (Electrostatic Field)</h4>
+                <div class="chart-legend">
+                  <span class="legend-dot ppm-scale"></span>
+                  <span class="legend-label">Demulsifier</span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart3" width="400" height="300" aria-label="BS&W vs Voltage relationship"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 4: Salt vs Temperature (color=Wash) -->
+            <div class="advanced-chart-card">
+              <div class="chart-card-header">
+                <h4>Salt vs Temperature (Thermal Desalting)</h4>
+                <div class="chart-legend">
+                  <span class="legend-dot wash-scale"></span>
+                  <span class="legend-label">Wash Water</span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart4" width="400" height="300" aria-label="Salt vs Temperature relationship"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 5: Capacity guardrail -->
+            <div class="advanced-chart-card">
+              <div class="chart-card-header">
+                <h4>Capacity Guardrail (Flow vs Outputs)</h4>
+                <div class="chart-legend">
+                  <span class="legend-dot multi-scale"></span>
+                  <span class="legend-label">ppm (color) • Voltage (size)</span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart5" width="400" height="300" aria-label="Capacity guardrail visualization"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 6: Trade-off map -->
+            <div class="advanced-chart-card">
+              <div class="chart-card-header">
+                <h4>Trade-off Map (ppm × T → BS&W)</h4>
+                <div class="chart-legend">
+                  <span class="legend-gradient"></span>
+                  <span class="legend-label">BS&W (%)</span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart6" width="400" height="300" aria-label="Trade-off map visualization"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart Controls -->
+          <div class="chart-controls">
+            <div class="control-group">
+              <label class="control-label">Auto-refresh:</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="autoRefreshCharts" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Refresh interval:</label>
+              <select id="refreshInterval" class="select-control">
+                <option value="5000">5 seconds</option>
+                <option value="10000" selected>10 seconds</option>
+                <option value="30000">30 seconds</option>
+                <option value="60000">1 minute</option>
+              </select>
+            </div>
+            <button class="btn-secondary" onclick="refreshAllCharts()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+              Refresh All Charts
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prediction Panel -->
+      <div id="prediction-panel" class="panel" style="display: none;">
+        <div class="panel-header">
+          <h2>Advanced Prediction Dashboard</h2>
+          <div class="panel-actions">
+            <button class="btn-primary-modern" onclick="retrainPredictionModel()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+              Retrain Model
+            </button>
+          </div>
+        </div>
+
+        <!-- Breach Risk Assessment -->
+        <div class="breach-risk-section">
+          <h3>🚨 Breach Risk Assessment</h3>
+
+          <div class="breach-risk-grid">
+            <!-- BS&W Breach Probability -->
+            <div class="breach-card bsw-breach">
+              <div class="breach-header">
+                <div class="breach-icon">💧</div>
+                <div class="breach-info">
+                  <h4>P(BS&W Breach)</h4>
+                  <div class="breach-horizon">Next 24 Hours</div>
+                </div>
+                <div class="breach-probability">
+                  <div class="probability-value" id="bswBreachProb">0.5%</div>
+                  <div class="probability-status low">Low Risk</div>
+                </div>
+              </div>
+              <div class="breach-visual">
+                <div class="probability-bar">
+                  <div class="probability-fill bsw-fill" style="width: 0.5%"></div>
+                </div>
+                <div class="probability-scale">
+                  <span>0%</span>
+                  <span>25%</span>
+                  <span>50%</span>
+                  <span>75%</span>
+                  <span>100%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Salt Breach Probability -->
+            <div class="breach-card salt-breach">
+              <div class="breach-header">
+                <div class="breach-icon">🧂</div>
+                <div class="breach-info">
+                  <h4>P(Salt Breach)</h4>
+                  <div class="breach-horizon">Next 24 Hours</div>
+                </div>
+                <div class="breach-probability">
+                  <div class="probability-value" id="saltBreachProb">0.0%</div>
+                  <div class="probability-status excellent">Excellent</div>
+                </div>
+              </div>
+              <div class="breach-visual">
+                <div class="probability-bar">
+                  <div class="probability-fill salt-fill" style="width: 0.0%"></div>
+                </div>
+                <div class="probability-scale">
+                  <span>0%</span>
+                  <span>25%</span>
+                  <span>50%</span>
+                  <span>75%</span>
+                  <span>100%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Time to Breach -->
+        <div class="time-to-breach-section">
+          <h3>⏱️ Time to Breach (T50)</h3>
+
+          <div class="time-to-breach-grid">
+            <!-- BS&W Time to Breach -->
+            <div class="breach-time-card">
+              <div class="breach-time-header">
+                <div class="breach-time-icon">💧</div>
+                <div class="breach-time-info">
+                  <h4>BS&W Breach</h4>
+                  <div class="breach-time-desc">Time until 50% breach probability</div>
+                </div>
+              </div>
+              <div class="breach-time-value">
+                <div class="time-display" id="bswTimeToBreach">— min</div>
+                <div class="time-status safe">Safe</div>
+              </div>
+              <div class="breach-time-visual">
+                <div class="time-gauge">
+                  <div class="time-gauge-fill" id="bswTimeGauge" style="--percentage: 100"></div>
+                  <div class="time-gauge-center">
+                    <div class="time-gauge-needle" id="bswTimeNeedle" style="--rotation: 0deg"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Salt Time to Breach -->
+            <div class="breach-time-card">
+              <div class="breach-time-header">
+                <div class="breach-time-icon">🧂</div>
+                <div class="breach-time-info">
+                  <h4>Salt Breach</h4>
+                  <div class="breach-time-desc">Time until 50% breach probability</div>
+                </div>
+              </div>
+              <div class="breach-time-value">
+                <div class="time-display" id="saltTimeToBreach">— min</div>
+                <div class="time-status excellent">Excellent</div>
+              </div>
+              <div class="breach-time-visual">
+                <div class="time-gauge">
+                  <div class="time-gauge-fill" id="saltTimeGauge" style="--percentage: 100"></div>
+                  <div class="time-gauge-center">
+                    <div class="time-gauge-needle" id="saltTimeNeedle" style="--rotation: 0deg"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- What-If Scenario -->
+        <div class="what-if-section">
+          <h3>🔮 What-If Scenario Analysis</h3>
+          <div class="what-if-description">
+            <p>Step changes applied now, held constant over prediction horizon</p>
+          </div>
+
+          <!-- Parameter Controls -->
+          <div class="what-if-controls">
+            <div class="parameter-group">
+              <div class="parameter-card">
+                <div class="parameter-label">
+                  <span class="parameter-icon">💧</span>
+                  <span class="parameter-name">Demulsifier</span>
+                  <span class="parameter-unit">ppm</span>
+                </div>
+                <div class="parameter-input">
+                  <input type="number" id="whatIfPPM" value="64.07" step="0.01" min="0" max="100">
+                  <div class="parameter-slider">
+                    <input type="range" id="ppmSlider" value="64.07" min="0" max="100" step="0.01">
+                  </div>
+                </div>
+              </div>
+
+              <div class="parameter-card">
+                <div class="parameter-label">
+                  <span class="parameter-icon">🌡️</span>
+                  <span class="parameter-name">Temperature</span>
+                  <span class="parameter-unit">°C</span>
+                </div>
+                <div class="parameter-input">
+                  <input type="number" id="whatIfTemp" value="115.00" step="0.1" min="80" max="140">
+                  <div class="parameter-slider">
+                    <input type="range" id="tempSlider" value="115.00" min="80" max="140" step="0.1">
+                  </div>
+                </div>
+              </div>
+
+              <div class="parameter-card">
+                <div class="parameter-label">
+                  <span class="parameter-icon">⚡</span>
+                  <span class="parameter-name">Voltage</span>
+                  <span class="parameter-unit">kV</span>
+                </div>
+                <div class="parameter-input">
+                  <input type="number" id="whatIfVoltage" value="27.86" step="0.01" min="20" max="35">
+                  <div class="parameter-slider">
+                    <input type="range" id="voltageSlider" value="27.86" min="20" max="35" step="0.01">
+                  </div>
+                </div>
+              </div>
+
+              <div class="parameter-card">
+                <div class="parameter-label">
+                  <span class="parameter-icon">💦</span>
+                  <span class="parameter-name">Wash Water</span>
+                  <span class="parameter-unit">%</span>
+                </div>
+                <div class="parameter-input">
+                  <input type="number" id="whatIfWash" value="1.8" step="0.1" min="0" max="10">
+                  <div class="parameter-slider">
+                    <input type="range" id="washSlider" value="1.8" min="0" max="10" step="0.1">
+                  </div>
+                </div>
+              </div>
+
+              <div class="parameter-card">
+                <div class="parameter-label">
+                  <span class="parameter-icon">🛢️</span>
+                  <span class="parameter-name">Flow Rate</span>
+                  <span class="parameter-unit">BPD</span>
+                </div>
+                <div class="parameter-input">
+                  <input type="number" id="whatIfFlow" value="31963.11" step="1" min="10000" max="100000">
+                  <div class="parameter-slider">
+                    <input type="range" id="flowSlider" value="31963.11" min="10000" max="100000" step="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="what-if-actions">
+              <button class="btn-secondary" onclick="resetWhatIf()">Reset to Current</button>
+              <button class="btn-primary-modern" onclick="runWhatIfSimulation()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14.7 6.3a1 1 0 0 0-1.4 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-.67 8.95"/>
+                  <path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-9-9 9 9 0 0 1 9-9c2.3 0 4.4.9 6 2.4"/>
+                </svg>
+                Run Simulation
+              </button>
+            </div>
+          </div>
+
+          <!-- What-If Results -->
+          <div class="what-if-results">
+            <div class="results-header">
+              <h4>Simulation Results</h4>
+              <div class="results-status" id="simulationStatus">Ready to simulate</div>
+            </div>
+
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="result-label">Predicted BS&W</div>
+                <div class="result-value" id="predictedBSW">0.44%</div>
+                <div class="result-change" id="bswChange">+0.02%</div>
+              </div>
+
+              <div class="result-card">
+                <div class="result-label">Predicted Salt</div>
+                <div class="result-value" id="predictedSalt">0.20 PTB</div>
+                <div class="result-change" id="saltChange">-0.01 PTB</div>
+              </div>
+
+              <div class="result-card">
+                <div class="result-label">Breach Risk Change</div>
+                <div class="result-value" id="breachRiskChange">+0.1%</div>
+                <div class="result-change" id="riskDirection">Low</div>
+              </div>
+
+              <div class="result-card">
+                <div class="result-label">Efficiency Impact</div>
+                <div class="result-value" id="efficiencyImpact">+2.3%</div>
+                <div class="result-change" id="efficiencyDirection">Improved</div>
+              </div>
+            </div>
+
+            <!-- What-If Chart -->
+            <div class="what-if-chart-container">
+              <div class="chart-header">
+                <h4>24-Hour Prediction Comparison</h4>
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <div class="legend-color current"></div>
+                    <span>Current Settings</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color scenario"></div>
+                    <span>What-If Scenario</span>
+                  </div>
+                </div>
+              </div>
+              <div class="what-if-chart">
+                <canvas id="whatIfChart" width="800" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Predictive Maintenance Panel -->
+      <div id="pm-panel" class="panel" style="display: none;">
+        <div class="panel-header">
+          <h2>Advanced Predictive Maintenance Dashboard</h2>
+          <div class="panel-actions">
+            <button class="btn-primary-modern" onclick="exportMaintenanceReport()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              Export Report
+            </button>
+          </div>
+        </div>
+
+        <!-- Overall Health Score -->
+        <div class="overall-health">
+          <div class="health-metric">
+            <div class="health-score">
+              <div class="score-circle">
+                <svg class="score-ring" width="120" height="120">
+                  <circle cx="60" cy="60" r="54" stroke="#e2e8f0" stroke-width="8" fill="none"/>
+                  <circle cx="60" cy="60" r="54" stroke="url(#healthGradient)" stroke-width="8" fill="none"
+                          stroke-dasharray="339.3" stroke-dashoffset="67.86" transform="rotate(-90 60 60)"/>
+                </svg>
+                <div class="score-text">
+                  <div class="score-number" id="overallScore">87</div>
+                  <div class="score-label">Health Score</div>
+                </div>
+                <defs>
+                  <linearGradient id="healthGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#10b981"/>
+                    <stop offset="50%" stop-color="#f59e0b"/>
+                    <stop offset="100%" stop-color="#ef4444"/>
+                  </linearGradient>
+                </defs>
+              </div>
+            </div>
+            <div class="health-info">
+              <h3>Desalter Health Status</h3>
+              <p class="health-description">Overall system health is <span class="health-status">Good</span> with minor optimization opportunities.</p>
+              <div class="health-metrics">
+                <div class="metric-item">
+                  <span class="metric-label">Downtime Risk:</span>
+                  <span class="metric-value risk-low" id="downtimeRisk">12%</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Next Inspection:</span>
+                  <span class="metric-value" id="nextInspection">7 days</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Critical Assets:</span>
+                  <span class="metric-value risk-medium" id="criticalCount">2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gap Separator -->
+        <div class="section-separator"></div>
+
+        <!-- Enhanced Asset Health Table -->
+        <div class="enhanced-asset-health">
+          <div class="table-header">
+            <h3>📊 Detailed Asset Health Matrix</h3>
+            <div class="table-controls">
+              <select id="assetFilter" class="select-control">
+                <option value="all">All Assets</option>
+                <option value="critical">Critical Only</option>
+                <option value="maintenance">Due for Maintenance</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="asset-table-container">
+            <table class="asset-health-table">
+              <thead>
+                <tr>
+                  <th>Asset</th>
+                  <th>Component</th>
+                  <th>Health Score</th>
+                  <th>Risk Level</th>
+                  <th>Downtime Impact</th>
+                  <th>Failure Mode</th>
+                  <th>Days to Action</th>
+                  <th>Trend</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Electrodes A</td>
+                  <td>Electrical</td>
+                  <td><span class="health-score warn">71</span></td>
+                  <td><span class="risk-badge medium">Medium</span></td>
+                  <td>High</td>
+                  <td>Fouling</td>
+                  <td>12 days</td>
+                  <td><canvas class="trend-sparkline" id="spark1" width="60" height="20"></canvas></td>
+                  <td><button class="btn-xs action-btn">Inspect</button></td>
+                </tr>
+                <tr>
+                  <td>Transformer T1</td>
+                  <td>Electrical</td>
+                  <td><span class="health-score danger">89</span></td>
+                  <td><span class="risk-badge high">High</span></td>
+                  <td>Critical</td>
+                  <td>Insulation</td>
+                  <td>5 days</td>
+                  <td><canvas class="trend-sparkline" id="spark2" width="60" height="20"></canvas></td>
+                  <td><button class="btn-xs action-btn urgent">Replace</button></td>
+                </tr>
+                <tr>
+                  <td>Demulsifier Pump</td>
+                  <td>Chemical</td>
+                  <td><span class="health-score ok">23</span></td>
+                  <td><span class="risk-badge low">Low</span></td>
+                  <td>Medium</td>
+                  <td>Clogging</td>
+                  <td>45 days</td>
+                  <td><canvas class="trend-sparkline" id="spark3" width="60" height="20"></canvas></td>
+                  <td><button class="btn-xs action-btn">Monitor</button></td>
+                </tr>
+                <tr>
+                  <td>Mixing Valve V9</td>
+                  <td>Process</td>
+                  <td><span class="health-score warn">56</span></td>
+                  <td><span class="risk-badge medium">Medium</span></td>
+                  <td>Medium</td>
+                  <td>Erosion</td>
+                  <td>28 days</td>
+                  <td><canvas class="trend-sparkline" id="spark4" width="60" height="20"></canvas></td>
+                  <td><button class="btn-xs action-btn">Inspect</button></td>
+                </tr>
+                <tr>
+                  <td>Wash Water System</td>
+                  <td>Process</td>
+                  <td><span class="health-score ok">34</span></td>
+                  <td><span class="risk-badge low">Low</span></td>
+                  <td>Low</td>
+                  <td>Contamination</td>
+                  <td>60 days</td>
+                  <td><canvas class="trend-sparkline" id="spark5" width="60" height="20"></canvas></td>
+                  <td><button class="btn-xs action-btn">Monitor</button></td>
+                </tr>
+                <tr>
+                  <td>Corrosion Probes</td>
+                  <td>Integrity</td>
+                  <td><span class="health-score ok">19</span></td>
+                  <td><span class="risk-badge low">Low</span></td>
+                  <td>Low</td>
+                  <td>Metal Loss</td>
+                  <td>180 days</td>
+                  <td><canvas class="trend-sparkline" id="spark6" width="60" height="20"></canvas></td>
+                  <td><button class="btn-xs action-btn">Monitor</button></td>
+                </tr>
+                <tr>
+                  <td>Control Valves</td>
+                  <td>Process</td>
+                  <td><span class="health-score warn">67</span></td>
+                  <td><span class="risk-badge medium">Medium</span></td>
+                  <td>Medium</td>
+                  <td>Actuator</td>
+                  <td>35 days</td>
+                  <td><canvas class="trend-sparkline" id="spark7" width="60" height="20"></canvas></td>
+                  <td><button class="btn-xs action-btn">Calibrate</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Advanced Health Monitoring Toggle -->
+        <div class="advanced-monitoring-toggle">
+          <button class="btn-advanced-monitoring" id="toggleAdvancedMonitoring">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Advanced Health Monitoring
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chevron-icon">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Advanced Monitoring Content (Hidden by default) -->
+        <div class="advanced-monitoring-content" id="advancedMonitoringContent">
+
+        <!-- System Components Monitoring -->
+        <div class="system-components">
+          <h3>Component Health Monitoring</h3>
+
+          <!-- Electrical System -->
+          <div class="component-group">
+            <h4>⚡ Electrical System</h4>
+            <div class="component-grid">
+              <div class="component-card" data-component="electrodes">
+                <div class="component-header">
+                  <div class="component-icon">🔌</div>
+                  <div class="component-info">
+                    <h5>Electrodes</h5>
+                    <div class="component-status warn">Degrading</div>
+                  </div>
+                  <div class="component-score">71</div>
+                </div>
+                <div class="component-metrics">
+                  <div class="metric">Resistance: <span id="electrodeResistance">+15%</span></div>
+                  <div class="metric">Fouling: <span id="electrodeFouling">Medium</span></div>
+                  <div class="metric">ETA: <span id="electrodeETA">12 days</span></div>
+                </div>
+                <div class="component-trend">
+                  <canvas id="electrodeTrend" width="200" height="40"></canvas>
+                </div>
+              </div>
+
+              <div class="component-card" data-component="transformer">
+                <div class="component-header">
+                  <div class="component-icon">🔧</div>
+                  <div class="component-info">
+                    <h5>Transformer</h5>
+                    <div class="component-status danger">Critical</div>
+                  </div>
+                  <div class="component-score">89</div>
+                </div>
+                <div class="component-metrics">
+                  <div class="metric">Temp Rise: <span id="transformerTemp">+8°C</span></div>
+                  <div class="metric">Oil Quality: <span id="transformerOil">Poor</span></div>
+                  <div class="metric">ETA: <span id="transformerETA">5 days</span></div>
+                </div>
+                <div class="component-trend">
+                  <canvas id="transformerTrend" width="200" height="40"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chemical System -->
+          <div class="component-group">
+            <h4>🧪 Chemical System</h4>
+            <div class="component-grid">
+              <div class="component-card" data-component="demulsifier">
+                <div class="component-header">
+                  <div class="component-icon">💧</div>
+                  <div class="component-info">
+                    <h5>Demulsifier System</h5>
+                    <div class="component-status ok">Good</div>
+                  </div>
+                  <div class="component-score">23</div>
+                </div>
+                <div class="component-metrics">
+                  <div class="metric">Flow Consistency: <span id="demulsifierFlow">98%</span></div>
+                  <div class="metric">Pump Health: <span id="demulsifierPump">Good</span></div>
+                  <div class="metric">ETA: <span id="demulsifierETA">45 days</span></div>
+                </div>
+                <div class="component-trend">
+                  <canvas id="demulsifierTrend" width="200" height="40"></canvas>
+                </div>
+              </div>
+
+              <div class="component-card" data-component="mixing">
+                <div class="component-header">
+                  <div class="component-icon">🔄</div>
+                  <div class="component-info">
+                    <h5>Mixing System</h5>
+                    <div class="component-status warn">Monitor</div>
+                  </div>
+                  <div class="component-score">56</div>
+                </div>
+                <div class="component-metrics">
+                  <div class="metric">Valve Wear: <span id="mixingValve">Medium</span></div>
+                  <div class="metric">Mixing Efficiency: <span id="mixingEfficiency">92%</span></div>
+                  <div class="metric">ETA: <span id="mixingETA">28 days</span></div>
+                </div>
+                <div class="component-trend">
+                  <canvas id="mixingTrend" width="200" height="40"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Process System -->
+          <div class="component-group">
+            <h4>🏭 Process System</h4>
+            <div class="component-grid">
+              <div class="component-card" data-component="washwater">
+                <div class="component-header">
+                  <div class="component-icon">🌊</div>
+                  <div class="component-info">
+                    <h5>Wash Water</h5>
+                    <div class="component-status ok">Good</div>
+                  </div>
+                  <div class="component-score">34</div>
+                </div>
+                <div class="component-metrics">
+                  <div class="metric">Contamination: <span id="washContamination">Low</span></div>
+                  <div class="metric">Flow Rate: <span id="washFlow">Stable</span></div>
+                  <div class="metric">ETA: <span id="washETA">60 days</span></div>
+                </div>
+                <div class="component-trend">
+                  <canvas id="washTrend" width="200" height="40"></canvas>
+                </div>
+              </div>
+
+              <div class="component-card" data-component="crude">
+                <div class="component-header">
+                  <div class="component-icon">🛢️</div>
+                  <div class="component-info">
+                    <h5>Crude Inlet</h5>
+                    <div class="component-status ok">Stable</div>
+                  </div>
+                  <div class="component-score">28</div>
+                </div>
+                <div class="component-metrics">
+                  <div class="metric">Gravity: <span id="crudeGravity">32°API</span></div>
+                  <div class="metric">Salt Content: <span id="crudeSalt">18 PTB</span></div>
+                  <div class="metric">ETA: <span id="crudeETA">90 days</span></div>
+                </div>
+                <div class="component-trend">
+                  <canvas id="crudeTrend" width="200" height="40"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Integrity & Corrosion -->
+          <div class="component-group">
+            <h4>🛡️ Integrity & Corrosion</h4>
+            <div class="component-grid">
+              <div class="component-card" data-component="corrosion">
+                <div class="component-header">
+                  <div class="component-icon">⚠️</div>
+                  <div class="component-info">
+                    <h5>Corrosion Monitoring</h5>
+                    <div class="component-status ok">Good</div>
+                  </div>
+                  <div class="component-score">19</div>
+                </div>
+                <div class="component-metrics">
+                  <div class="metric">Metal Loss: <span id="corrosionLoss">0.02mm/year</span></div>
+                  <div class="metric">Probe Health: <span id="corrosionProbe">Good</span></div>
+                  <div class="metric">ETA: <span id="corrosionETA">180 days</span></div>
+                </div>
+                <div class="component-trend">
+                  <canvas id="corrosionTrend" width="200" height="40"></canvas>
+                </div>
+              </div>
+
+              <div class="component-card" data-component="control">
+                <div class="component-header">
+                  <div class="component-icon">🎛️</div>
+                  <div class="component-info">
+                    <h5>Control Loops</h5>
+                    <div class="component-status warn">Monitor</div>
+                  </div>
+                  <div class="component-score">67</div>
+                </div>
+                <div class="component-metrics">
+                  <div class="metric">Response Time: <span id="controlResponse">+5%</span></div>
+                  <div class="metric">Stability: <span id="controlStability">Fair</span></div>
+                  <div class="metric">ETA: <span id="controlETA">35 days</span></div>
+                </div>
+                <div class="component-trend">
+                  <canvas id="controlTrend" width="200" height="40"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Predictive Analytics -->
+        <div class="predictive-analytics">
+          <h3>Risk Assessment & Predictions</h3>
+
+          <div class="analytics-grid">
+            <!-- Fouling Index -->
+            <div class="analytics-card">
+              <div class="analytics-header">
+                <h4>🧰 Fouling Risk Index</h4>
+                <div class="risk-score high">78</div>
+              </div>
+              <div class="analytics-content">
+                <div class="risk-trend">
+                  <canvas id="foulingChart" width="250" height="80"></canvas>
+                </div>
+                <div class="risk-factors">
+                  <div class="factor">Temperature: <span class="factor-value">High</span></div>
+                  <div class="factor">Crude Properties: <span class="factor-value">Medium</span></div>
+                  <div class="factor">Water Chemistry: <span class="factor-value">Low</span></div>
+                </div>
+                <div class="next-action">
+                  <strong>Next Action:</strong> Schedule heat exchanger inspection in 14 days
+                </div>
+              </div>
+            </div>
+
+            <!-- Downtime Prediction -->
+            <div class="analytics-card">
+              <div class="analytics-header">
+                <h4>⏰ Downtime Risk Prediction</h4>
+                <div class="risk-score medium">45</div>
+              </div>
+              <div class="analytics-content">
+                <div class="downtime-probability">
+                  <div class="probability-bar">
+                    <div class="probability-fill" style="width: 45%"></div>
+                  </div>
+                  <div class="probability-text">45% chance of unscheduled shutdown in next 30 days</div>
+                </div>
+                <div class="risk-contributors">
+                  <div class="contributor">
+                    <span class="contributor-name">Electrode Degradation</span>
+                    <span class="contributor-percent">35%</span>
+                  </div>
+                  <div class="contributor">
+                    <span class="contributor-name">Transformer Issues</span>
+                    <span class="contributor-percent">28%</span>
+                  </div>
+                  <div class="contributor">
+                    <span class="contributor-name">Fouling Risk</span>
+                    <span class="contributor-percent">22%</span>
+                  </div>
+                  <div class="contributor">
+                    <span class="contributor-name">Control Instability</span>
+                    <span class="contributor-percent">15%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Maintenance Calendar -->
+            <div class="analytics-card calendar">
+              <div class="analytics-header">
+                <h4>📅 Maintenance Schedule</h4>
+                <div class="calendar-icon">📅</div>
+              </div>
+              <div class="analytics-content">
+                <div class="maintenance-items">
+                  <div class="maintenance-item urgent">
+                    <div class="maintenance-date">Dec 18</div>
+                    <div class="maintenance-task">Transformer oil sampling</div>
+                    <div class="maintenance-priority">High</div>
+                  </div>
+                  <div class="maintenance-item normal">
+                    <div class="maintenance-date">Dec 25</div>
+                    <div class="maintenance-task">Electrode inspection</div>
+                    <div class="maintenance-priority">Medium</div>
+                  </div>
+                  <div class="maintenance-item normal">
+                    <div class="maintenance-date">Jan 5</div>
+                    <div class="maintenance-task">Control loop calibration</div>
+                    <div class="maintenance-priority">Low</div>
+                  </div>
+                  <div class="maintenance-item normal">
+                    <div class="maintenance-date">Jan 15</div>
+                    <div class="maintenance-task">Corrosion probe check</div>
+                    <div class="maintenance-priority">Low</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div> <!-- End Advanced Monitoring Content -->
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <span>© Desalter AI</span>
+    <span class="muted">Build • Monitor • Predict • Maintain</span>
+  </footer>
+
+  <script src="/static/js/result.js"></script>
+</body>
+</html>

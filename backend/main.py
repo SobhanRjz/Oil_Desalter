@@ -39,6 +39,11 @@ async def read_login():
 async def read_input():
     return FileResponse(FRONTEND_DIR / "html" / "input-page.html", media_type="text/html")
 
+# Serve the results page
+@app.api_route("/results", methods=["GET", "HEAD"])
+async def read_results():
+    return FileResponse(FRONTEND_DIR / "html" / "result.html", media_type="text/html")
+
 @app.get("/api/ping")
 def ping():
     return JSONResponse({"message": "Desalter backend is alive", "ok": True})

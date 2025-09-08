@@ -187,21 +187,14 @@ function updateProgressStep(stepNumber) {
 }
 
 function showResultsPage() {
-  // For now, just hide the overlay and show a success message
-  // Later this will navigate to the actual results page
+  // Hide the overlay and show success message
   hideLoadingOverlay();
-
-  // Show success message
   showOK('Optimization complete! Results ready.');
 
-  // Here you would typically navigate to results page:
-  // window.location.href = '/results.html';
-
-  // For demo purposes, show an alert
+  // Navigate to the results page after a brief delay
   setTimeout(() => {
-    alert('🎉 Optimization Complete!\n\nResults page will be implemented next.\n\nFor now, check the console for saved parameters.');
-    console.log('Optimization Results:', JSON.parse(localStorage.getItem('desalterInputs')));
-  }, 500);
+    window.location.href = '/results';
+  }, 1000);
 }
 
 // Soft Glass Mount Animation System
