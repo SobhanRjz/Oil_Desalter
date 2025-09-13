@@ -1,0 +1,26 @@
+2025-09-13 16:52:37,241 - INFO - ============================================================
+2025-09-13 16:52:37,241 - INFO - Build Started - 2025-09-13 16:52:37.241245
+2025-09-13 16:52:37,241 - INFO - Python version: 3.10.2 (tags/v3.10.2:a58ebcc, Jan 17 2022, 14:12:15) [MSC v.1929 64 bit (AMD64)]
+2025-09-13 16:52:37,242 - INFO - Platform: win32
+2025-09-13 16:52:37,242 - INFO - ============================================================
+2025-09-13 16:52:37,242 - INFO - Project root: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2
+2025-09-13 16:52:37,242 - INFO - Building executable...
+2025-09-13 16:52:37,243 - INFO - Using spec file: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\desalter.spec
+2025-09-13 16:52:37,243 - INFO - Running command: C:\Users\sobha\AppData\Local\Programs\Python\Python310\python.exe -m pyinstaller --clean --noconfirm desalter.spec
+2025-09-13 16:52:37,354 - ERROR - Build failed with error code 1
+2025-09-13 16:52:37,375 - ERROR - PyInstaller stderr:
+2025-09-13 16:52:37,376 - ERROR -   C:\Users\sobha\AppData\Local\Programs\Python\Python310\python.exe: No module named pyinstaller
+2025-09-13 16:52:37,396 - ERROR - Full build log saved to: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\build_log.txt
+2025-09-13 16:53:45,342 - INFO - ============================================================
+2025-09-13 16:53:45,356 - INFO - Build Started - 2025-09-13 16:53:45.356774
+2025-09-13 16:53:45,359 - INFO - Python version: 3.10.2 (tags/v3.10.2:a58ebcc, Jan 17 2022, 14:12:15) [MSC v.1929 64 bit (AMD64)]
+2025-09-13 16:53:45,380 - INFO - Platform: win32
+2025-09-13 16:53:45,380 - INFO - ============================================================
+2025-09-13 16:53:45,380 - INFO - Project root: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2
+2025-09-13 16:53:45,381 - INFO - Building executable...
+2025-09-13 16:53:45,383 - INFO - Using spec file: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\desalter.spec
+2025-09-13 16:53:45,383 - INFO - Running command: C:\Users\sobha\AppData\Local\Programs\Python\Python310\python.exe -m pyinstaller --clean --noconfirm desalter.spec
+2025-09-13 16:53:45,513 - ERROR - Build failed with error code 1
+2025-09-13 16:53:45,514 - ERROR - PyInstaller stderr:
+2025-09-13 16:53:45,515 - ERROR -   C:\Users\sobha\AppData\Local\Programs\Python\Python310\python.exe: No module named pyinstaller
+2025-09-13 16:53:45,522 - ERROR - Full build log saved to: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\build_log.txt

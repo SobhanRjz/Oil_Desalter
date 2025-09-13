@@ -40,6 +40,60 @@ Put your own **hero.mp4** into `frontend/assets/`. Aim for:
 - short loop (8–20s), visually calm
 - ensure it's muted, autoplay-friendly
 
+## Build Standalone Executable with Nuitka
+
+Nuitka is a Python compiler that creates standalone executables with faster startup times and smaller sizes compared to PyInstaller.
+
+### Quick Build (Recommended)
+```bash
+# Install Nuitka
+pip install nuitka
+
+# Build executable (includes fallback to PyInstaller)
+python build_exe.py
+
+# Executable will be created at: dist/desalter.exe
+```
+
+### Advanced Nuitka Options
+```bash
+# Use dedicated Nuitka script for more options
+python build_nuitka.py
+
+# Options available:
+# 1. Standalone + Onefile (Recommended)
+# 2. Minimal build
+# 3. Debug build
+```
+
+### Nuitka vs PyInstaller Comparison
+
+| Feature | Nuitka | PyInstaller |
+|---------|--------|-------------|
+| Startup Speed | ⚡ Faster | 🐌 Slower |
+| Executable Size | 📦 Smaller | 📦 Larger |
+| Build Time | 🕐 Longer | ⚡ Faster |
+| Dependencies | 📋 More complex | ✅ Simpler |
+| Performance | 🚀 Better | ⚖️ Good |
+
+### Manual Nuitka Commands
+
+```bash
+# Basic build
+python -m nuitka --onefile launcher.py
+
+# Advanced build with data inclusion
+python -m nuitka \
+  --standalone \
+  --onefile \
+  --windows-disable-console \
+  --include-data-dir=frontend=frontend \
+  --include-data-dir=backend=backend \
+  --output-dir=dist \
+  launcher.py
+```
+
 ## Notes
 - The page respects **prefers-reduced-motion** and hides the video for those users.
 - JS pauses the video if the tab is hidden to save resources.
+- Nuitka executables typically start 2-3x faster than PyInstaller executables

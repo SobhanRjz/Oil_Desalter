@@ -1,0 +1,46 @@
+2025-09-13 17:23:35,202 - desalter - INFO - ==================================================
+2025-09-13 17:23:35,202 - desalter - INFO - Desalter Application Started - 2025-09-13 17:23:35.202132
+2025-09-13 17:23:35,202 - desalter - INFO - Log file: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\dist\desalter_log.txt
+2025-09-13 17:23:35,202 - desalter - INFO - Python version: 3.12.6 (tags/v3.12.6:a4a2d2b, Sep  6 2024, 20:11:23) [MSC v.1940 64 bit (AMD64)]
+2025-09-13 17:23:35,213 - desalter - INFO - ==================================================
+2025-09-13 17:23:35,213 - desalter - INFO - Starting Desalter application...
+2025-09-13 17:23:35,213 - desalter - INFO - Running from executable: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\dist
+2025-09-13 17:23:35,213 - desalter - INFO - Directory contents:
+2025-09-13 17:23:35,213 - desalter - INFO -   desalter.exe (file)
+2025-09-13 17:23:35,213 - desalter - INFO -   desalter.rar (file)
+2025-09-13 17:23:35,213 - desalter - INFO -   desalter2.rar (file)
+2025-09-13 17:23:35,213 - desalter - INFO -   desalter_log.txt (file)
+2025-09-13 17:23:35,213 - desalter - INFO - Added to Python path: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\dist
+2025-09-13 17:23:35,213 - desalter - INFO - Importing FastAPI application...
+2025-09-13 17:23:35,213 - desalter - INFO - Python path: ['C:\\Users\\sobha\\Desktop\\Oil and Gas\\Code\\desalter\\desalter_streamlit_opt_en2\\dist', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI183842\\base_library.zip', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI183842\\lib-dynload', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI183842', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI183842\\win32', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI183842\\pywin32_system32', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI183842\\setuptools\\_vendor']
+2025-09-13 17:23:35,490 - desalter - INFO - Successfully imported FastAPI app
+2025-09-13 17:23:35,490 - desalter - INFO - Checking port availability...
+2025-09-13 17:23:37,530 - desalter - INFO - Port 7000 is available
+2025-09-13 17:23:37,530 - desalter - INFO - Starting server on http://127.0.0.1:7000
+2025-09-13 17:23:37,530 - desalter - INFO - Press Ctrl+C to stop the server
+2025-09-13 17:23:37,531 - desalter - INFO - Starting uvicorn server...
+2025-09-13 17:23:39,532 - desalter - INFO - Opening browser...
+2025-09-13 17:23:39,675 - desalter - INFO - Browser open result: True
+2025-09-13 17:40:07,165 - desalter - INFO - ==================================================
+2025-09-13 17:40:07,165 - desalter - INFO - Desalter Application Started - 2025-09-13 17:40:07.165944
+2025-09-13 17:40:07,165 - desalter - INFO - Log file: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\dist\desalter_log.txt
+2025-09-13 17:40:07,165 - desalter - INFO - Python version: 3.12.6 (tags/v3.12.6:a4a2d2b, Sep  6 2024, 20:11:23) [MSC v.1940 64 bit (AMD64)]
+2025-09-13 17:40:07,165 - desalter - INFO - ==================================================
+2025-09-13 17:40:07,165 - desalter - INFO - Starting Desalter application...
+2025-09-13 17:40:07,166 - desalter - INFO - Running from executable: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\dist
+2025-09-13 17:40:07,166 - desalter - INFO - Directory contents:
+2025-09-13 17:40:07,166 - desalter - INFO -   desalter.exe (file)
+2025-09-13 17:40:07,166 - desalter - INFO -   desalter.rar (file)
+2025-09-13 17:40:07,166 - desalter - INFO -   desalter2.rar (file)
+2025-09-13 17:40:07,167 - desalter - INFO -   desalter_log.txt (file)
+2025-09-13 17:40:07,167 - desalter - INFO - Added to Python path: C:\Users\sobha\Desktop\Oil and Gas\Code\desalter\desalter_streamlit_opt_en2\dist
+2025-09-13 17:40:07,167 - desalter - INFO - Importing FastAPI application...
+2025-09-13 17:40:07,167 - desalter - INFO - Python path: ['C:\\Users\\sobha\\Desktop\\Oil and Gas\\Code\\desalter\\desalter_streamlit_opt_en2\\dist', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI280882\\base_library.zip', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI280882\\lib-dynload', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI280882', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI280882\\win32', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI280882\\pywin32_system32', 'C:\\Users\\sobha\\AppData\\Local\\Temp\\_MEI280882\\setuptools\\_vendor']
+2025-09-13 17:40:07,491 - desalter - INFO - Successfully imported FastAPI app
+2025-09-13 17:40:07,491 - desalter - INFO - Checking port availability...
+2025-09-13 17:40:07,491 - desalter - INFO - Port 7000 is already in use. Trying port 7001...
+2025-09-13 17:40:07,491 - desalter - INFO - Starting server on http://127.0.0.1:7001
+2025-09-13 17:40:07,491 - desalter - INFO - Press Ctrl+C to stop the server
+2025-09-13 17:40:07,491 - desalter - INFO - Starting uvicorn server...
+2025-09-13 17:40:09,496 - desalter - INFO - Opening browser...
+2025-09-13 17:40:09,617 - desalter - INFO - Browser open result: True
