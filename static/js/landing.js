@@ -52,6 +52,6 @@ cta?.addEventListener('click', (e) => {
 
   // Navigate to login page after a short delay for smooth UX
   setTimeout(() => {
-    window.location.href = '/login';
+    window.location.href = 'login.html';
   }, 800);
 });
