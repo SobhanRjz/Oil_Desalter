@@ -34,11 +34,24 @@ uvicorn main:app --reload --port 8000
 
 3) Open http://127.0.0.1:8000 in your browser.
 
-## Replace the background video
+## Development Workflow
+
+### Editing HTML/CSS/JS Files
+1. **Edit source files** in `frontend/html/`, `frontend/css/`, `frontend/js/`
+2. **Sync to static folder**: Run `python sync_static.py`
+3. **Commit and push** to deploy to GitHub Pages
+
+### Replace the background video
 Put your own **hero.mp4** into `frontend/assets/`. Aim for:
 - H.264 (mp4) 1080p or 1440p, ~4–8 Mbps
 - short loop (8–20s), visually calm
 - ensure it's muted, autoplay-friendly
+
+### GitHub Pages Deployment
+- **Source**: `static/` folder
+- **URL**: `https://sobhanrjz.github.io/Oil_Desalter/`
+- **Auto-deploy**: Triggers on push to `main` branch
+- **Permissions**: Requires `id-token: write` for authentication
 
 ## Build Standalone Executable with Nuitka
 
