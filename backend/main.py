@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse, FileResponse
 from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI(title="Desalter Landing Backend")
 
