@@ -16,12 +16,20 @@ def sync_static():
     # Ensure static directory exists
     static_dir.mkdir(exist_ok=True)
 
-    # Copy HTML files
+    # Copy HTML files and fix static paths
     html_src = frontend_dir / "html"
     if html_src.exists():
         for html_file in html_src.glob("*.html"):
-            shutil.copy2(html_file, static_dir / html_file.name)
-            print(f"Copied {html_file.name}")
+            # Read and fix paths in HTML files
+            content = html_file.read_text(encoding='utf-8')
+            # Fix both ./static/ and /static/ paths to relative paths
+            content = content.replace('./static/', './')
+            content = content.replace('/static/', './')
+            
+            # Write corrected content to static directory
+            output_file = static_dir / html_file.name
+            output_file.write_text(content, encoding='utf-8')
+            print(f"Copied and fixed paths in {html_file.name}")
 
     # Copy assets, css, js (these should already be there, but ensure they're up to date)
     for subdir in ["assets", "css", "js"]:
