@@ -36,7 +36,7 @@ form.addEventListener('submit', async (e) => {
 
     // Navigate to input page after successful login
     setTimeout(() => {
-      window.location.href = 'input-page.html';
+      window.location.href = '/input';
     }, 1000); // Brief delay to show success message
 
   } catch (err) {

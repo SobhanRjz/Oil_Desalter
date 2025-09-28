@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Desalter • Optimization Results</title>
-  <link rel="stylesheet" href="css/result.css" />
+  <link rel="stylesheet" href="/static/css/result.css" />
 </head>
 <body>
   <!-- Top bar (you can replace with your site header) -->
@@ -59,7 +59,7 @@
       <!-- Secondary Services Grid -->
       <div class="secondary-services">
         <!-- Monitoring Card -->
-        <div class="service-card monitoring-theme" id="monitoring-card">
+        <div class="service-card monitoring-theme disabled" id="monitoring-card">
           <div class="card-visual">
             <div class="card-icon">📊</div>
           </div>
@@ -218,7 +218,7 @@
               </svg>
             </div>
             <div class="metric-content">
-              <div class="metric-label">Voltage</div>
+              <div class="metric-label">Power</div>
               <div class="metric-value" id="mV">28 <span class="metric-unit">kV</span></div>
               <div class="metric-delta neutral" id="mVΔ">+0</div>
             </div>
@@ -238,97 +238,53 @@
           </div>
         </div>
 
-        <!-- Modern Controls Section -->
-        <div class="modern-controls">
-          <div class="control-group">
-            <h4 class="control-title">Axis Configuration</h4>
-            <div class="radio-group-modern">
-              <label class="radio-modern">
-                <input type="radio" name="axes" value="ppm_T" checked>
-                <span class="radio-text">ppm × Temperature</span>
-              </label>
-              <label class="radio-modern">
-                <input type="radio" name="axes" value="ppm_V">
-                <span class="radio-text">ppm × Voltage</span>
-              </label>
-              <label class="radio-modern">
-                <input type="radio" name="axes" value="wash_T">
-                <span class="radio-text">Wash × Temperature</span>
-              </label>
-              <label class="radio-modern">
-                <input type="radio" name="axes" value="wash_V">
-                <span class="radio-text">Wash × Voltage</span>
-              </label>
-              <label class="radio-modern">
-                <input type="radio" name="axes" value="flow_wash">
-                <span class="radio-text">Flow × Wash</span>
-              </label>
+        <!-- Process Parameter Charts Section -->
+        <div class="process-charts-section">
+          <div class="charts-header">
+            <h3>Desalting Process Parameter Relationships</h3>
+            <p>Engineering analysis of crude oil desalting process parameters</p>
+          </div>
+
+          <div class="charts-grid">
+            <!-- Chart 1: Crude Flowrate vs Washwater Flowrate -->
+            <div class="chart-container">
+              <div class="chart-header">
+                <h4>Crude Flowrate vs Washwater Flowrate</h4>
+              </div>
+              <canvas id="processChart1" width="400" height="300"></canvas>
+            </div>
+
+            <!-- Chart 2: Temperature vs Demulsifier -->
+            <div class="chart-container">
+              <div class="chart-header">
+                <h4>Temperature vs Demulsifier Requirement</h4>
+              </div>
+              <canvas id="processChart2" width="400" height="300"></canvas>
+            </div>
+
+            <!-- Chart 3: Crude Flowrate vs Temperature -->
+            <div class="chart-container">
+              <div class="chart-header">
+                <h4>Crude Flowrate vs Operating Temperature</h4>
+              </div>
+              <canvas id="processChart3" width="400" height="300"></canvas>
+            </div>
+
+            <!-- Chart 4: Temperature vs Power -->
+            <div class="chart-container">
+              <div class="chart-header">
+                <h4>Temperature vs Power Consumption</h4>
+              </div>
+              <canvas id="processChart4" width="400" height="300"></canvas>
             </div>
           </div>
 
-          <div class="control-group">
-            <h4 class="control-title">Visualization Metric</h4>
-            <div class="radio-group-modern">
-              <label class="radio-modern primary">
-                <input type="radio" name="metric" value="bsw" checked>
-                <span class="radio-text">BS&W (%)</span>
-              </label>
-              <label class="radio-modern primary">
-                <input type="radio" name="metric" value="salt">
-                <span class="radio-text">Salt (PTB)</span>
-              </label>
+          <!-- Multi-parameter Chart -->
+          <div class="multi-chart-container">
+            <div class="chart-header">
+              <h4>Process Performance Analysis: BS&W and Salt Content</h4>
             </div>
-          </div>
-
-          <div class="control-group">
-            <h4 class="control-title">Grid Resolution</h4>
-            <div class="slider-container">
-              <input id="resSlider" type="range" min="20" max="120" value="70" />
-              <div class="slider-value">
-                <span id="resVal">70</span>
-                <span class="slider-unit">points</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Decision Map Section -->
-        <div class="decision-map-section">
-          <div class="map-header">
-            <h3 id="chartTitle">Decision Map — ppm × Temperature → BS&W</h3>
-            <div class="map-legend">
-              <div class="legend-item">
-                <div class="legend-dot recommended"></div>
-                <span>Recommended</span>
-              </div>
-              <div class="legend-item">
-                <div class="legend-dot baseline"></div>
-                <span>Baseline</span>
-              </div>
-              <div class="legend-item">
-                <div class="legend-line iso"></div>
-                <span>Iso-cost</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="map-container">
-            <div class="map-canvas-wrapper">
-              <div class="y-axis-label">Temperature (°C)</div>
-              <canvas id="decisionMap" width="980" height="320" aria-label="Decision map"></canvas>
-              <div class="x-axis-label">Demulsifier (ppm)</div>
-            </div>
-
-            <!-- Modern Colorbar -->
-            <div class="modern-colorbar">
-              <div class="colorbar-gradient"></div>
-              <div class="colorbar-ticks">
-                <span>0.4</span>
-                <span>0.8</span>
-                <span>1.2</span>
-              </div>
-              <div class="colorbar-label" id="barLabel">BS&W (%)</div>
-            </div>
+            <canvas id="processChart5" width="800" height="400"></canvas>
           </div>
         </div>
       </div>
@@ -568,95 +524,83 @@
           </button>
         </div>
 
-        <!-- Advanced Charts Section (Hidden by default) -->
+        <!-- Process Relationship Charts Section (Hidden by default) -->
         <div class="advanced-charts-container" id="advancedCharts" style="display: none;">
           <div class="advanced-charts-header">
-            <h3>Targeted Relationship Charts</h3>
-            <p class="advanced-subtitle">Advanced visualizations showing parameter relationships and optimization insights</p>
+            <h3>Process Parameter Relationships</h3>
+            <p class="advanced-subtitle">Key relationships in crude oil desalting process parameters</p>
           </div>
 
           <div class="advanced-charts-grid">
-            <!-- Chart 1: BS&W vs ppm (color=T) -->
+            <!-- Chart 1: Crude Flowrate vs Washwater Flowrate -->
             <div class="advanced-chart-card">
               <div class="chart-card-header">
-                <h4>BS&W vs ppm (Chemical Dose vs Quality)</h4>
+                <h4>Crude Flow vs Washwater Flow</h4>
                 <div class="chart-legend">
-                  <span class="legend-dot temp-scale"></span>
-                  <span class="legend-label">Temperature</span>
+                  <span class="legend-dot flow-relationship"></span>
+                  <span class="legend-label">Flow Relationship</span>
                 </div>
               </div>
               <div class="chart-container">
-                <canvas id="chart1" width="400" height="300" aria-label="BS&W vs ppm relationship"></canvas>
+                <canvas id="chart1" width="400" height="300" aria-label="Crude Flowrate vs Washwater Flowrate"></canvas>
               </div>
             </div>
 
-            <!-- Chart 2: Salt vs Wash (color=Flow) -->
+            <!-- Chart 2: Temperature vs Demulsifier -->
             <div class="advanced-chart-card">
               <div class="chart-card-header">
-                <h4>Salt vs Wash (Wash Efficiency)</h4>
+                <h4>Temperature vs Demulsifier</h4>
                 <div class="chart-legend">
-                  <span class="legend-dot flow-scale"></span>
-                  <span class="legend-label">Flow Rate</span>
+                  <span class="legend-dot temp-demulsifier"></span>
+                  <span class="legend-label">Inverse Relationship</span>
                 </div>
               </div>
               <div class="chart-container">
-                <canvas id="chart2" width="400" height="300" aria-label="Salt vs Wash relationship"></canvas>
+                <canvas id="chart2" width="400" height="300" aria-label="Temperature vs Demulsifier relationship"></canvas>
               </div>
             </div>
 
-            <!-- Chart 3: BS&W vs Voltage (color=ppm) -->
+            <!-- Chart 3: Temperature vs Crude Flowrate -->
             <div class="advanced-chart-card">
               <div class="chart-card-header">
-                <h4>BS&W vs Voltage (Electrostatic Field)</h4>
+                <h4>Temperature vs Crude Flowrate</h4>
                 <div class="chart-legend">
-                  <span class="legend-dot ppm-scale"></span>
-                  <span class="legend-label">Demulsifier</span>
+                  <span class="legend-dot temp-flow"></span>
+                  <span class="legend-label">Temperature-Flow</span>
                 </div>
               </div>
               <div class="chart-container">
-                <canvas id="chart3" width="400" height="300" aria-label="BS&W vs Voltage relationship"></canvas>
+                <canvas id="chart3" width="400" height="300" aria-label="Temperature vs Crude Flowrate relationship"></canvas>
               </div>
             </div>
 
-            <!-- Chart 4: Salt vs Temperature (color=Wash) -->
+            <!-- Chart 4: Temperature vs Power -->
             <div class="advanced-chart-card">
               <div class="chart-card-header">
-                <h4>Salt vs Temperature (Thermal Desalting)</h4>
+                <h4>Temperature vs Power</h4>
                 <div class="chart-legend">
-                  <span class="legend-dot wash-scale"></span>
-                  <span class="legend-label">Wash Water</span>
+                  <span class="legend-dot temp-power"></span>
+                  <span class="legend-label">Power Consumption</span>
                 </div>
               </div>
               <div class="chart-container">
-                <canvas id="chart4" width="400" height="300" aria-label="Salt vs Temperature relationship"></canvas>
+                <canvas id="chart4" width="400" height="300" aria-label="Temperature vs Power relationship"></canvas>
               </div>
             </div>
 
-            <!-- Chart 5: Capacity guardrail -->
-            <div class="advanced-chart-card">
+            <!-- Chart 5: Multi-parameter comparison -->
+            <div class="advanced-chart-card chart-wide">
               <div class="chart-card-header">
-                <h4>Capacity Guardrail (Flow vs Outputs)</h4>
+                <h4>BS&W and Salt vs Process Parameters</h4>
                 <div class="chart-legend">
-                  <span class="legend-dot multi-scale"></span>
-                  <span class="legend-label">ppm (color) • Voltage (size)</span>
-                </div>
-              </div>
-              <div class="chart-container">
-                <canvas id="chart5" width="400" height="300" aria-label="Capacity guardrail visualization"></canvas>
-              </div>
-            </div>
-
-            <!-- Chart 6: Trade-off map -->
-            <div class="advanced-chart-card">
-              <div class="chart-card-header">
-                <h4>Trade-off Map (ppm × T → BS&W)</h4>
-                <div class="chart-legend">
-                  <span class="legend-gradient"></span>
+                  <span class="legend-dot bsw-line"></span>
                   <span class="legend-label">BS&W (%)</span>
+                  <span class="legend-dot salt-line"></span>
+                  <span class="legend-label">Salt (PTB)</span>
                 </div>
               </div>
               <div class="chart-container">
-                <canvas id="chart6" width="400" height="300" aria-label="Trade-off map visualization"></canvas>
+                <canvas id="chart5" width="800" height="400" aria-label="Multi-parameter comparison chart"></canvas>
               </div>
             </div>
           </div>
@@ -775,7 +719,7 @@
                 <div class="breach-time-icon">💧</div>
                 <div class="breach-time-info">
                   <h4>BS&W Breach</h4>
-                  <div class="breach-time-desc">Time until 50% breach probability</div>
+                  <div class="breach-time-desc">Time until 50% of  probability</div>
                 </div>
               </div>
               <div class="breach-time-value">
@@ -798,7 +742,7 @@
                 <div class="breach-time-icon">🧂</div>
                 <div class="breach-time-info">
                   <h4>Salt Breach</h4>
-                  <div class="breach-time-desc">Time until 50% breach probability</div>
+                  <div class="breach-time-desc">Time until 50% of breach probability</div>
                 </div>
               </div>
               <div class="breach-time-value">
@@ -821,7 +765,7 @@
         <div class="what-if-section">
           <h3>🔮 What-If Scenario Analysis</h3>
           <div class="what-if-description">
-            <p>Step changes applied now, held constant over prediction horizon</p>
+            <p>Apply changes into the parameters values to find optimization prediction</p>
           </div>
 
           <!-- Parameter Controls -->
@@ -858,8 +802,8 @@
               <div class="parameter-card">
                 <div class="parameter-label">
                   <span class="parameter-icon">⚡</span>
-                  <span class="parameter-name">Voltage</span>
-                  <span class="parameter-unit">kV</span>
+                  <span class="parameter-name">power</span>
+                  <span class="parameter-unit">kVA</span>
                 </div>
                 <div class="parameter-input">
                   <input type="number" id="whatIfVoltage" value="27.86" step="0.01" min="20" max="35">
@@ -873,7 +817,7 @@
                 <div class="parameter-label">
                   <span class="parameter-icon">💦</span>
                   <span class="parameter-name">Wash Water</span>
-                  <span class="parameter-unit">%</span>
+                  <span class="parameter-unit">vol.%</span>
                 </div>
                 <div class="parameter-input">
                   <input type="number" id="whatIfWash" value="1.8" step="0.1" min="0" max="10">
@@ -886,7 +830,7 @@
               <div class="parameter-card">
                 <div class="parameter-label">
                   <span class="parameter-icon">🛢️</span>
-                  <span class="parameter-name">Flow Rate</span>
+                  <span class="parameter-name">crude</span>
                   <span class="parameter-unit">BPD</span>
                 </div>
                 <div class="parameter-input">
@@ -946,7 +890,7 @@
             <!-- What-If Chart -->
             <div class="what-if-chart-container">
               <div class="chart-header">
-                <h4>24-Hour Prediction Comparison</h4>
+                <h4>24-Hour BS&W Prediction Comparison</h4>
                 <div class="chart-legend">
                   <div class="legend-item">
                     <div class="legend-color current"></div>
@@ -960,6 +904,26 @@
               </div>
               <div class="what-if-chart">
                 <canvas id="whatIfChart" width="800" height="300"></canvas>
+              </div>
+            </div>
+
+            <!-- Salt Prediction Chart -->
+            <div class="what-if-chart-container">
+              <div class="chart-header">
+                <h4>24-Hour Salt Prediction Comparison</h4>
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <div class="legend-color current"></div>
+                    <span>Current Settings</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color scenario"></div>
+                    <span>What-If Scenario</span>
+                  </div>
+                </div>
+              </div>
+              <div class="what-if-chart">
+                <canvas id="saltPredictionChart" width="800" height="300"></canvas>
               </div>
             </div>
           </div>
@@ -1070,24 +1034,24 @@
                 <tr>
                   <td>Transformer T1</td>
                   <td>Electrical</td>
-                  <td><span class="health-score danger">89</span></td>
-                  <td><span class="risk-badge high">High</span></td>
-                  <td>Critical</td>
-                  <td>Insulation</td>
-                  <td>5 days</td>
+                  <td><span class="health-score ok">89</span></td>
+                  <td><span class="risk-badge low">Low</span></td>
+                  <td>Low</td>
+                  <td>Normal</td>
+                  <td>45 days</td>
                   <td><canvas class="trend-sparkline" id="spark2" width="60" height="20"></canvas></td>
-                  <td><button class="btn-xs action-btn urgent">Replace</button></td>
+                  <td><button class="btn-xs action-btn">Monitor</button></td>
                 </tr>
                 <tr>
                   <td>Demulsifier Pump</td>
                   <td>Chemical</td>
-                  <td><span class="health-score ok">23</span></td>
-                  <td><span class="risk-badge low">Low</span></td>
-                  <td>Medium</td>
+                  <td><span class="health-score danger">23</span></td>
+                  <td><span class="risk-badge high">High</span></td>
+                  <td>Critical</td>
                   <td>Clogging</td>
-                  <td>45 days</td>
+                  <td>7 days</td>
                   <td><canvas class="trend-sparkline" id="spark3" width="60" height="20"></canvas></td>
-                  <td><button class="btn-xs action-btn">Monitor</button></td>
+                  <td><button class="btn-xs action-btn urgent">Replace</button></td>
                 </tr>
                 <tr>
                   <td>Mixing Valve V9</td>
@@ -1103,24 +1067,24 @@
                 <tr>
                   <td>Wash Water System</td>
                   <td>Process</td>
-                  <td><span class="health-score ok">34</span></td>
-                  <td><span class="risk-badge low">Low</span></td>
-                  <td>Low</td>
+                  <td><span class="health-score danger">34</span></td>
+                  <td><span class="risk-badge high">High</span></td>
+                  <td>Critical</td>
                   <td>Contamination</td>
-                  <td>60 days</td>
+                  <td>10 days</td>
                   <td><canvas class="trend-sparkline" id="spark5" width="60" height="20"></canvas></td>
-                  <td><button class="btn-xs action-btn">Monitor</button></td>
+                  <td><button class="btn-xs action-btn urgent">Service</button></td>
                 </tr>
                 <tr>
                   <td>Corrosion Probes</td>
                   <td>Integrity</td>
-                  <td><span class="health-score ok">19</span></td>
-                  <td><span class="risk-badge low">Low</span></td>
-                  <td>Low</td>
+                  <td><span class="health-score danger">19</span></td>
+                  <td><span class="risk-badge high">High</span></td>
+                  <td>Critical</td>
                   <td>Metal Loss</td>
-                  <td>180 days</td>
+                  <td>3 days</td>
                   <td><canvas class="trend-sparkline" id="spark6" width="60" height="20"></canvas></td>
-                  <td><button class="btn-xs action-btn">Monitor</button></td>
+                  <td><button class="btn-xs action-btn urgent">Replace</button></td>
                 </tr>
                 <tr>
                   <td>Control Valves</td>
@@ -1440,6 +1404,7 @@
     <span class="muted">Build • Monitor • Predict • Maintain</span>
   </footer>
 
-  <script src="js/result.js"></script>
+  <script src="/static/js/result.js"></script>
 </body>
 </html>
+

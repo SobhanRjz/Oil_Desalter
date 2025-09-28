@@ -1,11 +1,14 @@
 // Pretty number formatter
 const fmt = n => Number(n).toLocaleString(undefined);
 
-// Hook up “Samples” live output
+// Hook up "Samples" live output
 const samples = document.getElementById('n_samples');
 const samplesOut = document.getElementById('samples_out');
+
+if (samples && samplesOut) {
 samples.addEventListener('input', () => samplesOut.textContent = fmt(samples.value));
 samplesOut.textContent = fmt(samples.value);
+}
 
 const $ = id => document.getElementById(id);
 const ids = [
@@ -32,10 +35,16 @@ const defaults = {
   try {
     const obj = JSON.parse(saved);
     ids.forEach(k => {
-      if ($(k).type === 'checkbox') { $(k).checked = !!obj[k]; }
-      else $(k).value = obj[k];
+      const el = $(k);
+      if (el) {
+        if (el.type === 'checkbox') { el.checked = !!obj[k]; }
+        else el.value = obj[k];
+      }
     });
-    samplesOut.textContent = fmt($('n_samples').value);
+    const nSamplesEl = $('n_samples');
+    if (nSamplesEl) {
+      samplesOut.textContent = fmt(nSamplesEl.value);
+    }
   } catch {}
 })();
 
@@ -74,7 +83,12 @@ function showOK(msg){
 
 function collect(){
   const obj = {};
-  ids.forEach(k => obj[k] = ($(`${k}`).type === 'checkbox') ? $(`${k}`).checked : Number($(`${k}`).value));
+  ids.forEach(k => {
+    const el = $(`${k}`);
+    if (el) {
+      obj[k] = (el.type === 'checkbox') ? el.checked : Number(el.value);
+    }
+  });
   return obj;
 }
 
@@ -98,9 +112,14 @@ function validate(p){
 
 $('resetBtn').addEventListener('click', () => {
   Object.entries(defaults).forEach(([k,v]) => {
-    if ($(k).type === 'checkbox') $(k).checked = !!v; else $(k).value = v;
+    const el = $(k);
+    if (el) {
+      if (el.type === 'checkbox') el.checked = !!v; else el.value = v;
+    }
   });
-  samplesOut.textContent = fmt(defaults.n_samples);
+  if (samplesOut) {
+    samplesOut.textContent = fmt(defaults.n_samples);
+  }
   localStorage.removeItem('desalterInputs');
   showOK('Defaults restored.');
 });
@@ -193,7 +212,7 @@ function showResultsPage() {
 
   // Navigate to the results page after a brief delay
   setTimeout(() => {
-    window.location.href = 'result.html';
+    window.location.href = '/results';
   }, 1000);
 }
 
@@ -263,4 +282,310 @@ document.addEventListener('DOMContentLoaded', () => {
       element.classList.add('reveal');
     });
   }
+
+  // Initialize drag and drop for priority items
+  initializePriorityDragDrop();
 });
+
+// Priority Drag and Drop System
+function initializePriorityDragDrop() {
+  const priorityGrid = document.getElementById('priorityGrid');
+  if (!priorityGrid) return;
+
+  const priorityItems = priorityGrid.querySelectorAll('.priority-item[draggable="true"]');
+  let draggedElement = null;
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  priorityItems.forEach(item => {
+    // Desktop drag events
+    item.addEventListener('dragstart', handleDragStart);
+    item.addEventListener('dragover', handleDragOver);
+    item.addEventListener('drop', handleDrop);
+    item.addEventListener('dragend', handleDragEnd);
+    item.addEventListener('dragenter', handleDragEnter);
+    item.addEventListener('dragleave', handleDragLeave);
+
+    // Touch events for mobile
+    item.addEventListener('touchstart', handleTouchStart, { passive: false });
+    item.addEventListener('touchmove', handleTouchMove, { passive: false });
+    item.addEventListener('touchend', handleTouchEnd, { passive: false });
+  });
+
+  function handleDragStart(e) {
+    console.log('Drag start initiated on:', this);
+    draggedElement = this;
+    console.log('Set draggedElement to:', draggedElement);
+    this.classList.add('dragging');
+
+    // Create professional drag image
+    const dragImage = this.cloneNode(true);
+    dragImage.style.position = 'absolute';
+    dragImage.style.top = '-1000px';
+    dragImage.style.opacity = '0.8';
+    dragImage.style.transform = 'rotate(3deg) scale(1.05)';
+    dragImage.style.pointerEvents = 'none';
+    document.body.appendChild(dragImage);
+
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setDragImage(dragImage, e.offsetX, e.offsetY);
+    e.dataTransfer.setData('text/html', this.outerHTML);
+
+    // Remove the temporary drag image after a short delay
+    setTimeout(() => {
+      document.body.removeChild(dragImage);
+    }, 0);
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  }
+
+  function handleDragEnter(e) {
+    e.preventDefault();
+    if (this !== draggedElement) {
+      // Remove drag-over from all other items first
+      priorityItems.forEach(item => {
+        if (item !== this) item.classList.remove('drag-over');
+      });
+      this.classList.add('drag-over');
+    }
+  }
+
+  function handleDragLeave(e) {
+    // Only remove if we're actually leaving the element (not entering a child)
+    if (!this.contains(e.relatedTarget)) {
+      this.classList.remove('drag-over');
+    }
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    console.log('Drop event fired', { draggedElement, target: this });
+
+    // Ensure we have a valid dragged element
+    if (!draggedElement || !draggedElement.parentNode) {
+      console.error('Invalid dragged element:', draggedElement);
+      this.classList.remove('drag-over');
+      return;
+    }
+
+    console.log('Dragged element is valid, proceeding with drop');
+
+    if (this !== draggedElement) {
+      const allItems = Array.from(priorityGrid.querySelectorAll('.priority-item'));
+      const draggedIndex = allItems.indexOf(draggedElement);
+      const targetIndex = allItems.indexOf(this);
+
+      console.log('Indices:', { draggedIndex, targetIndex, draggedElement, target: this });
+
+      // Add reordering animation class
+      priorityItems.forEach(item => {
+        if (item !== draggedElement) {
+          item.classList.add('reordering');
+        }
+      });
+
+      // Perform DOM manipulation immediately (no delay for debugging)
+      if (draggedIndex < targetIndex) {
+        console.log('Inserting before next sibling');
+        this.parentNode.insertBefore(draggedElement, this.nextSibling);
+      } else {
+        console.log('Inserting before target');
+        this.parentNode.insertBefore(draggedElement, this);
+      }
+
+      // Update priority numbers
+      updatePriorityNumbers();
+
+      // Remove reordering animation after transition
+      setTimeout(() => {
+        priorityItems.forEach(item => {
+          item.classList.remove('reordering');
+        });
+      }, 400);
+    }
+
+    this.classList.remove('drag-over');
+  }
+
+  function handleDragEnd(e) {
+    console.log('Drag end fired for:', this);
+    this.classList.remove('dragging');
+
+    // Clean up all drag states
+    priorityItems.forEach(item => {
+      item.classList.remove('drag-over', 'reordering');
+    });
+
+    console.log('Resetting draggedElement from:', draggedElement);
+    draggedElement = null;
+    console.log('DraggedElement is now:', draggedElement);
+
+    // Add subtle success animation
+    this.style.animation = 'none';
+    this.offsetHeight; // Trigger reflow
+    this.style.animation = 'floatUp 0.6s ease-out';
+    setTimeout(() => {
+      this.style.animation = '';
+    }, 600);
+  }
+
+  // Touch event handlers for mobile support
+  function handleTouchStart(e) {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      draggedElement = this;
+
+      // Add visual feedback
+      this.classList.add('dragging');
+
+      // Haptic feedback if available
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
+      }
+    }
+  }
+
+  function handleTouchMove(e) {
+    if (!draggedElement || e.touches.length !== 1) return;
+
+    e.preventDefault();
+    const touch = e.touches[0];
+    const deltaX = Math.abs(touch.clientX - touchStartX);
+    const deltaY = Math.abs(touch.clientY - touchStartY);
+
+    // Only start dragging if moved significantly (prevent accidental drags)
+    if (deltaX > 10 || deltaY > 10) {
+      const elementsAtPoint = document.elementsFromPoint(touch.clientX, touch.clientY);
+      const priorityItem = elementsAtPoint.find(el =>
+        el.classList.contains('priority-item') && el !== draggedElement
+      );
+
+      // Clear previous drag-over states
+      priorityItems.forEach(item => item.classList.remove('drag-over'));
+
+      // Add drag-over to target item
+      if (priorityItem) {
+        priorityItem.classList.add('drag-over');
+      }
+    }
+  }
+
+  function handleTouchEnd(e) {
+    if (!draggedElement || !draggedElement.parentNode) return;
+
+    const touch = e.changedTouches[0];
+    const elementsAtPoint = document.elementsFromPoint(touch.clientX, touch.clientY);
+    const targetItem = elementsAtPoint.find(el =>
+      el.classList.contains('priority-item') && el !== draggedElement
+    );
+
+    if (targetItem) {
+      // Perform the reordering
+      const allItems = Array.from(priorityGrid.querySelectorAll('.priority-item'));
+      const draggedIndex = allItems.indexOf(draggedElement);
+      const targetIndex = allItems.indexOf(targetItem);
+
+      // Add reordering animation
+      priorityItems.forEach(item => {
+        if (item !== draggedElement) {
+          item.classList.add('reordering');
+        }
+      });
+
+      setTimeout(() => {
+        if (draggedIndex < targetIndex) {
+          targetItem.parentNode.insertBefore(draggedElement, targetItem.nextSibling);
+        } else {
+          targetItem.parentNode.insertBefore(draggedElement, targetItem);
+        }
+
+        updatePriorityNumbers();
+
+        setTimeout(() => {
+          priorityItems.forEach(item => {
+            item.classList.remove('reordering');
+          });
+        }, 400);
+      }, 50);
+
+      // Haptic feedback for successful drop
+      if (navigator.vibrate) {
+        navigator.vibrate([30, 50, 30]);
+      }
+    }
+
+    // Clean up
+    priorityItems.forEach(item => {
+      item.classList.remove('drag-over', 'dragging', 'reordering');
+    });
+
+    draggedElement = null;
+
+    // Success animation
+    if (targetItem) {
+      this.style.animation = 'floatUp 0.6s ease-out';
+      setTimeout(() => {
+        this.style.animation = '';
+      }, 600);
+    }
+  }
+
+  function updatePriorityNumbers() {
+    const items = priorityGrid.querySelectorAll('.priority-item');
+    items.forEach((item, index) => {
+      const numberSpan = item.querySelector('.priority-number');
+      if (numberSpan) {
+        numberSpan.textContent = (index + 1).toString();
+        item.setAttribute('data-priority', index + 1);
+      }
+    });
+
+    // Save the new priority order to localStorage
+    savePriorityOrder();
+  }
+
+  function savePriorityOrder() {
+    const items = priorityGrid.querySelectorAll('.priority-item');
+    const priorityOrder = Array.from(items).map(item => {
+      return {
+        priority: item.getAttribute('data-priority'),
+        text: item.querySelector('.priority-text').textContent,
+        icon: item.querySelector('.priority-icon').textContent
+      };
+    });
+    localStorage.setItem('priorityOrder', JSON.stringify(priorityOrder));
+  }
+
+  // Load saved priority order on page load
+  function loadPriorityOrder() {
+    const savedOrder = localStorage.getItem('priorityOrder');
+    if (savedOrder) {
+      try {
+        const priorityOrder = JSON.parse(savedOrder);
+        // Reorder elements based on saved order
+        priorityOrder.forEach((saved, index) => {
+          const items = priorityGrid.querySelectorAll('.priority-item');
+          const currentItem = Array.from(items).find(item => 
+            item.querySelector('.priority-text').textContent === saved.text
+          );
+          if (currentItem && index < items.length) {
+            priorityGrid.appendChild(currentItem);
+          }
+        });
+        updatePriorityNumbers();
+      } catch (e) {
+        console.log('Could not load saved priority order');
+      }
+    }
+  }
+
+  // Load saved order on initialization
+  loadPriorityOrder();
+}

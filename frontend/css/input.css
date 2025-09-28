@@ -113,7 +113,6 @@ body {
 }
 /* Layout Components */
 .main-container {
-  min-height: 100vh;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(0.5px);
 }
@@ -198,6 +197,8 @@ body {
   cursor: pointer;
   transition: all var(--transition-normal);
   white-space: nowrap;
+  margin-bottom: var(--spacing-3xl);
+  margin-right: var(--spacing-3xl);
 }
 
 .btn-primary {
@@ -291,6 +292,43 @@ body {
   align-items: center;
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-3xl);
+}
+
+.section-header.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.section-header.disabled .section-icon {
+  opacity: 0.5;
+  filter: grayscale(100%);
+}
+
+.section-header.disabled .section-title h2 {
+  color: var(--color-gray-500);
+}
+
+.section-header.disabled .section-description {
+  color: var(--color-gray-400);
+  font-style: italic;
+}
+
+.config-section.disabled {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.config-section.disabled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .section-icon {
@@ -807,19 +845,6 @@ input:checked + .switch-slider {
 }
 
 /* Priority Section */
-.priority-section {
-  margin-top: var(--spacing-3xl);
-  padding-top: var(--spacing-3xl);
-  border-top: 1px solid var(--color-gray-200);
-}
-
-.priority-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--color-gray-900);
-  margin-bottom: var(--spacing-lg);
-}
-
 .priority-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -863,6 +888,169 @@ input:checked + .switch-slider {
 
 .priority-item:hover::before {
   left: 100%;
+}
+
+/* Drag and Drop Styles */
+.priority-item {
+  position: relative;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.priority-item[draggable="true"] {
+  cursor: grab;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.priority-item[draggable="true"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.priority-item[draggable="true"]:active {
+  cursor: grabbing;
+  transform: scale(0.98);
+}
+
+.priority-item.dragging {
+  opacity: 0.8;
+  transform: rotate(3deg) scale(1.05);
+  box-shadow:
+    var(--shadow-xl),
+    0 0 20px rgba(37, 99, 235, 0.3),
+    0 0 40px rgba(37, 99, 235, 0.1);
+  z-index: 1000;
+  border-radius: var(--r-xl);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.priority-item.dragging::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg,
+    rgba(37, 99, 235, 0.2),
+    rgba(34, 211, 238, 0.2),
+    rgba(167, 139, 250, 0.2),
+    rgba(37, 99, 235, 0.2)
+  );
+  background-size: 200% 200%;
+  animation: shimmer 2s linear infinite;
+  border-radius: calc(var(--r-xl) + 2px);
+  z-index: -1;
+}
+
+.priority-item.drag-over {
+  position: relative;
+  border: 3px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(45deg, var(--brand), var(--brand-2)) border-box;
+  animation: pulseBorder 1.5s ease-in-out infinite;
+  transform: scale(1.02);
+  box-shadow: var(--shadow-xl), 0 0 30px rgba(37, 99, 235, 0.2);
+}
+
+.priority-item.drag-over::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: var(--brand);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.drag-handle {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-gray-400);
+  font-size: 1.4rem;
+  cursor: grab;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.priority-item:hover .drag-handle {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+  color: var(--brand);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+  transform: translateY(-50%) scale(0.95);
+}
+
+.priority-item.reordering {
+  animation: reorderSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Professional Animation Keyframes */
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+@keyframes pulseBorder {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes reorderSlide {
+  0% {
+    transform: translateX(-10px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) scale(1.05);
+    opacity: 0;
+  }
 }
 
 .priority-number {
@@ -1198,8 +1386,8 @@ input:checked + .switch-slider {
 
 /* Footer */
 .page-footer {
-  margin-top: var(--spacing-4xl);
-  padding-top: var(--spacing-3xl);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
   border-top: 1px solid var(--color-gray-200);
 }
 
@@ -1492,9 +1680,9 @@ input:checked + .switch-slider {
 
 /* Soft Glass Mount Reveal System */
 .glass-mount {
-  opacity: 0;
-  transform: scale(var(--glass-scale)) translateY(20px);
-  filter: blur(var(--glass-blur));
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0px);
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity, transform, filter;
 }
@@ -1504,8 +1692,8 @@ input:checked + .switch-slider {
 }
 
 .stagger-item {
-  opacity: 0;
-  transform: translateY(15px) scale(0.98);
+  opacity: 1;
+  transform: translateY(0) scale(1);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity, transform;
 }
@@ -1522,6 +1710,12 @@ input:checked + .switch-slider {
 .stagger-item[data-stagger="6"] { animation-delay: calc(var(--stagger-delay) * 6); }
 .stagger-item[data-stagger="7"] { animation-delay: calc(var(--stagger-delay) * 7); }
 .stagger-item[data-stagger="8"] { animation-delay: calc(var(--stagger-delay) * 8); }
+.stagger-item[data-stagger="9"] { animation-delay: calc(var(--stagger-delay) * 9); }
+.stagger-item[data-stagger="10"] { animation-delay: calc(var(--stagger-delay) * 10); }
+.stagger-item[data-stagger="11"] { animation-delay: calc(var(--stagger-delay) * 11); }
+.stagger-item[data-stagger="12"] { animation-delay: calc(var(--stagger-delay) * 12); }
+.stagger-item[data-stagger="13"] { animation-delay: calc(var(--stagger-delay) * 13); }
+.stagger-item[data-stagger="14"] { animation-delay: calc(var(--stagger-delay) * 14); }
 
 /* Accessibility: Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
@@ -1555,6 +1749,7 @@ input:checked + .switch-slider {
   opacity: 0;
   transform: translateY(20px);
   animation: slideInUp 0.6s ease-out var(--delay-3) forwards;
+  margin-top: var(--spacing-xl);
 }
 
 .primary-config {
@@ -1688,6 +1883,44 @@ input:checked + .switch-slider {
 
   .priority-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Enhanced mobile drag and drop */
+  .priority-item[draggable="true"] {
+    cursor: grab;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .priority-item[draggable="true"]:active {
+    cursor: grabbing;
+    transform: scale(0.98);
+    -webkit-transform: scale(0.98);
+  }
+
+  .drag-handle {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
+
+  .priority-item:hover .drag-handle {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  /* Reduce animations on mobile for better performance */
+  @media (max-width: 768px) {
+    .priority-item.dragging {
+      transform: rotate(2deg) scale(1.02);
+    }
+
+    .priority-item.drag-over {
+      transform: scale(1.01);
+    }
+
+    .priority-item.reordering {
+      animation-duration: 0.3s;
+    }
   }
 }
 

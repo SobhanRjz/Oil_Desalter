@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Desalter — Optimization Inputs</title>
-  <link rel="stylesheet" href="css/input.css" />
+  <link rel="stylesheet" href="/static/css/input.css" />
 </head>
 <body>
   <main class="main-container">
@@ -33,7 +33,7 @@
 
       <div class="content-grid">
         <!-- QUALITY & STRATEGY -->
-        <section class="config-section glass-mount">
+        <section class="config-section">
           <div class="section-header">
             <div class="section-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -41,20 +41,20 @@
               </svg>
             </div>
             <div class="section-title">
-              <h2>Quality & Strategy</h2>
-              <p class="section-description">Set optimization targets and quality parameters</p>
+              <h2>Principal Targets</h2>
+              <p class="section-description">Set principal optimization targets</p>
             </div>
           </div>
 
           <!-- Primary Configuration - Most Important -->
           <div class="primary-config">
             <div class="primary-config-header">
-              <div class="priority-badge">Primary Parameters</div>
+              <div class="priority-badge">Product Specification</div>
               <p class="primary-description">Critical quality targets that drive optimization decisions</p>
             </div>
 
             <div class="primary-grid">
-              <div class="primary-card featured-card stagger-item card-pro" data-stagger="1">
+              <div class="primary-card featured-card card-pro" "1">
                 <div class="card-highlight">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -62,13 +62,13 @@
                   <span>Critical</span>
                 </div>
                 <label class="input-group">
-                  <span class="input-label primary-label">Target BS&W (%)</span>
+                  <span class="input-label primary-label">BS&W (vol.%)</span>
                   <input type="number" id="spec_bsw" min="0.05" max="2.0" step="0.05" value="0.50" class="input-field primary-input" />
-                  <span class="input-hint primary-hint">Upper limit for basic sediment & water - Primary quality constraint</span>
+                  <span class="input-hint primary-hint">Maximum allowable basic sediment & water</span>
                 </label>
               </div>
 
-              <div class="primary-card featured-card stagger-item card-pro" data-stagger="2">
+              <div class="primary-card featured-card card-pro" "2">
                 <div class="card-highlight">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h.01M16 4h.01M12 2l3 3-3 3-3-3 3-3z"/>
@@ -76,78 +76,65 @@
                   <span>Critical</span>
                 </div>
                 <label class="input-group">
-                  <span class="input-label primary-label">Spec Salt (PTB)</span>
+                  <span class="input-label primary-label">Salt (PTB)</span>
                   <input type="number" id="spec_salt" min="0.1" max="50.0" step="0.1" value="5.00" class="input-field primary-input" />
-                  <span class="input-hint primary-hint">Maximum allowable salt content - Critical quality specification</span>
+                  <span class="input-hint primary-hint">Maximum allowable salt content</span>
                 </label>
               </div>
             </div>
           </div>
 
-          <!-- Additional Configuration Options -->
-          <div class="additional-options">
-            <div class="additional-grid">
-              <div class="config-card secondary-option stagger-item card-pro" data-stagger="3">
-                <label class="input-group">
-                  <span class="input-label">Optimization Samples</span>
-                  <div class="range-container">
-                    <input type="range" id="n_samples" min="500" max="10000" step="500" value="3000" class="range-slider" />
-                    <div class="range-value">
-                      <span id="samples_out">3,000</span>
-                      <span class="range-unit">samples</span>
-                    </div>
-                  </div>
-                  <span class="input-hint">Higher sample count improves accuracy</span>
-                </label>
-              </div>
-
-              <div class="config-card secondary-option stagger-item card-pro" data-stagger="4">
-                <div class="switch-container">
-                  <span class="switch-label">Minimize Wash Water</span>
-                  <label class="switch">
-                    <input type="checkbox" id="use_minimize_wash" />
-                    <span class="switch-slider"></span>
-                  </label>
-                  <span class="switch-hint">Optimize water usage in wash process</span>
-                </div>
-              </div>
+        <section class="config-section">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <div class="section-title">
+              <h2>Priorities optimization parameters</h2>
+              <p class="section-description">Set optimization objectives and priority rankings</p>
             </div>
           </div>
-
           <div class="priority-section">
-            <h3 class="priority-title">Optimization Priorities</h3>
-            <div class="priority-grid">
-              <div class="priority-item priority-1 stagger-item card-pro" data-stagger="5">
+            <div class="priority-grid" id="priorityGrid">
+              <div class="priority-item card-pro" draggable="true" data-priority="1">
                 <span class="priority-number">1</span>
                 <span class="priority-icon">📈</span>
                 <span class="priority-text">Maximize Flow</span>
+                <span class="drag-handle">⋮⋮</span>
               </div>
-              <div class="priority-item priority-2 stagger-item card-pro" data-stagger="6">
+              <div class="priority-item card-pro" draggable="true" data-priority="2">
                 <span class="priority-number">2</span>
                 <span class="priority-icon">💰</span>
                 <span class="priority-text">Minimize Chemical</span>
+                <span class="drag-handle">⋮⋮</span>
               </div>
-              <div class="priority-item priority-3 stagger-item card-pro" data-stagger="7">
+              <div class="priority-item card-pro" draggable="true" data-priority="3">
                 <span class="priority-number">3</span>
                 <span class="priority-icon">🌡️</span>
                 <span class="priority-text">Minimize Temperature</span>
+                <span class="drag-handle">⋮⋮</span>
               </div>
-              <div class="priority-item priority-4 stagger-item card-pro" data-stagger="8">
+              <div class="priority-item card-pro" draggable="true" data-priority="4">
                 <span class="priority-number">4</span>
                 <span class="priority-icon">⚡</span>
-                <span class="priority-text">Minimize Voltage</span>
+                <span class="priority-text">Minimize Power</span>
+                <span class="drag-handle">⋮⋮</span>
               </div>
-              <div class="priority-item priority-5 stagger-item card-pro" data-stagger="9">
+              <div class="priority-item card-pro" draggable="true" data-priority="5">
                 <span class="priority-number">5</span>
                 <span class="priority-icon">💧</span>
                 <span class="priority-text">Minimize Wash</span>
+                <span class="drag-handle">⋮⋮</span>
               </div>
             </div>
           </div>
         </section>
 
         <!-- OPERATING PARAMETERS -->
-        <section class="config-section glass-mount">
+        <section class="config-section">
           <div class="section-header">
             <div class="section-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -155,14 +142,14 @@
               </svg>
             </div>
             <div class="section-title">
-              <h2>Searching Range</h2>
-              <p class="section-description">Configure process flow, temperature, electrical, and chemical parameters</p>
+              <h2>Operational Targets</h2>
+              <p class="section-description">Set acceptable range for operating parameters</p>
             </div>
           </div>
 
           <div class="parameters-grid">
             <!-- Process Flow -->
-            <div class="parameter-card stagger-item card-pro" data-stagger="10">
+            <div class="parameter-card card-pro" "8">
               <div class="parameter-header">
                 <div class="parameter-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -170,7 +157,7 @@
                     <path d="M12 12v4M8 12v4m8-4v4"/>
                   </svg>
                 </div>
-                <h3>Process Flow</h3>
+                <h3>Capacity</h3>
               </div>
               <div class="parameter-inputs">
                 <label class="input-group">
@@ -191,7 +178,7 @@
             </div>
 
             <!-- Temperature -->
-            <div class="parameter-card stagger-item card-pro" data-stagger="11">
+            <div class="parameter-card card-pro" "9">
               <div class="parameter-header">
                 <div class="parameter-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -219,35 +206,35 @@
             </div>
 
             <!-- Electrical -->
-            <div class="parameter-card stagger-item card-pro" data-stagger="12">
+            <div class="parameter-card card-pro" "10">
               <div class="parameter-header">
                 <div class="parameter-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
                   </svg>
                 </div>
-                <h3>Voltage</h3>
+                <h3>Power</h3>
               </div>
               <div class="parameter-inputs">
                 <label class="input-group">
-                  <span class="input-label">Min Voltage</span>
+                  <span class="input-label">Min Power</span>
                   <div class="input-with-unit">
                     <input type="number" id="V_min" step="1" value="22" class="input-field" />
-                    <span class="unit">kV</span>
+                    <span class="unit">kVA</span>
                   </div>
                 </label>
                 <label class="input-group">
-                  <span class="input-label">Max Voltage</span>
+                  <span class="input-label">Max Power</span>
                   <div class="input-with-unit">
                     <input type="number" id="V_max" step="1" value="32" class="input-field" />
-                    <span class="unit">kV</span>
+                    <span class="unit">kVA</span>
                   </div>
                 </label>
               </div>
             </div>
 
             <!-- Demulsifier -->
-            <div class="parameter-card stagger-item card-pro" data-stagger="13">
+            <div class="parameter-card card-pro" "11">
               <div class="parameter-header">
                 <div class="parameter-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -275,7 +262,7 @@
             </div>
 
             <!-- Wash Water -->
-            <div class="parameter-card stagger-item card-pro" data-stagger="14">
+            <div class="parameter-card card-pro" "12">
               <div class="parameter-header">
                 <div class="parameter-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -286,14 +273,14 @@
               </div>
               <div class="parameter-inputs">
                 <label class="input-group">
-                  <span class="input-label">Min % of Crude</span>
+                  <span class="input-label">Min vol.% of Crude</span>
                   <div class="input-with-unit">
                     <input type="number" id="wash_min" step="0.1" value="0.5" class="input-field" />
                     <span class="unit">%</span>
                   </div>
                 </label>
                 <label class="input-group">
-                  <span class="input-label">Max % of Crude</span>
+                  <span class="input-label">Max vol.% of Crude</span>
                   <div class="input-with-unit">
                     <input type="number" id="wash_max" step="0.1" value="4.0" class="input-field" />
                     <span class="unit">%</span>
@@ -302,23 +289,38 @@
               </div>
             </div>
 
-            <!-- Baseline Values -->
-            <div class="parameter-card baseline-wide stagger-item card-pro" data-stagger="15">
-              <div class="parameter-header">
-                <div class="parameter-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                  </svg>
-                </div>
-                <h3>Baseline Values</h3>
+        </section>
+
+        <!-- CURRENT VALUES -->
+        <section class="config-section disabled">
+          <div class="section-header disabled">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <div class="section-title">
+              <h2>Current Values</h2>
+              <p class="section-description">Current operational parameters (Read-only)</p>
+            </div>
+          </div>
+
+          <div class="parameter-card baseline-wide card-pro" "13">
+            <div class="parameter-header">
+              <div class="parameter-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
               </div>
+              <h3>Current Values</h3>
+            </div>
               <div class="baseline-content">
                 <div class="baseline-grid">
                   <!-- Row 1: Flow and Demulsifier -->
                   <div class="baseline-row">
                     <div class="baseline-item">
                       <label class="input-group">
-                        <span class="input-label">Flow (BPD)</span>
+                        <span class="input-label">inlet wet crude oil</span>
                         <div class="input-with-unit">
                           <input type="number" id="baseline_flow" step="1000" value="30000" class="input-field baseline-input" />
                           <span class="unit">BPD</span>
@@ -349,10 +351,10 @@
                     </div>
                     <div class="baseline-item">
                       <label class="input-group">
-                        <span class="input-label">Voltage (kV)</span>
+                        <span class="input-label">power (kVA)</span>
                         <div class="input-with-unit">
                           <input type="number" id="baseline_voltage" step="1" value="28" class="input-field baseline-input" />
-                          <span class="unit">kV</span>
+                          <span class="unit">kVA</span>
                         </div>
                       </label>
                     </div>
@@ -362,7 +364,7 @@
                   <div class="baseline-row wash-row">
                     <div class="baseline-item wash-item">
                       <label class="input-group">
-                        <span class="input-label">Wash (%)</span>
+                        <span class="input-label">Wash water(vol.%)</span>
                         <div class="input-with-unit">
                           <input type="number" id="baseline_wash" step="0.1" value="2.0" class="input-field baseline-input" />
                           <span class="unit">%</span>
@@ -373,9 +375,10 @@
                 </div>
               </div>
             </div>
+        </section>
 
-            <!-- Advanced Settings -->
-            <div class="parameter-card advanced-card stagger-item card-pro" data-stagger="16">
+        <!-- Advanced Settings
+            <div class="parameter-card advanced-card card-pro" "14">
               <div class="parameter-header">
                 <div class="parameter-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -400,7 +403,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </section>
 
@@ -496,6 +499,6 @@
     </div>
   </div>
 
-  <script src="js/input.js" defer></script>
+  <script src="/static/js/input.js" defer></script>
 </body>
 </html>
