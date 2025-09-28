@@ -212,7 +212,7 @@ function showResultsPage() {
 
   // Navigate to the results page after a brief delay
   setTimeout(() => {
-    window.location.href = '/results';
+    window.location.href = './result.html';
   }, 1000);
 }
 

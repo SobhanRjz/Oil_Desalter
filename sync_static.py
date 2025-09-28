@@ -32,7 +32,7 @@ def sync_static():
             print(f"Copied and fixed paths in {html_file.name}")
 
     # Copy assets, css, js (these should already be there, but ensure they're up to date)
-    for subdir in ["assets", "css", "js"]:
+    for subdir in ["assets", "css"]:
         src_dir = frontend_dir / subdir
         dst_dir = static_dir / subdir
         if src_dir.exists():
@@ -40,6 +40,28 @@ def sync_static():
                 shutil.rmtree(dst_dir)
             shutil.copytree(src_dir, dst_dir)
             print(f"Updated {subdir}/")
+    
+    # Copy JS files and fix navigation paths
+    js_src = frontend_dir / "js"
+    js_dst = static_dir / "js"
+    if js_src.exists():
+        if js_dst.exists():
+            shutil.rmtree(js_dst)
+        js_dst.mkdir(exist_ok=True)
+        
+        for js_file in js_src.glob("*.js"):
+            # Read and fix navigation paths in JS files
+            content = js_file.read_text(encoding='utf-8')
+            # Fix navigation paths for GitHub Pages
+            content = content.replace("window.location.href = '/login'", "window.location.href = './login.html'")
+            content = content.replace("window.location.href = '/input'", "window.location.href = './input-page.html'")
+            content = content.replace("window.location.href = '/results'", "window.location.href = './result.html'")
+            
+            # Write corrected content to static directory
+            output_file = js_dst / js_file.name
+            output_file.write_text(content, encoding='utf-8')
+            print(f"Copied and fixed navigation in {js_file.name}")
+        print(f"Updated js/")
 
     print("✅ Static files synced successfully!")
     print("You can now commit and push to deploy to GitHub Pages")
