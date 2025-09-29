@@ -1357,27 +1357,27 @@
 }
 
 .metric-delta.up {
-  color: var(--accent);
-  background: rgba(22, 163, 74, 0.1);
+  color: inherit;
+  background: none;
 }
 
 .metric-delta.down {
-  color: var(--accent-2);
-  background: rgba(220, 38, 38, 0.1);
+  color: inherit;
+  background: none;
 }
 
 .metric-delta.neutral {
-  color: #64748b;
-  background: rgba(100, 116, 139, 0.1);
+  color: inherit;
+  background: none;
 }
 
 /* Process Parameter Charts Section */
 .process-charts-section {
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
   margin-bottom: 40px;
 }
 
@@ -1389,13 +1389,13 @@
 .charts-header h3 {
   font-size: 24px;
   font-weight: 700;
-  color: #1e293b;
+  color: #f1f5f9;
   margin: 0 0 8px 0;
 }
 
 .charts-header p {
   font-size: 16px;
-  color: #64748b;
+  color: #cbd5e1;
   margin: 0;
 }
 
@@ -1412,6 +1412,7 @@
   border-radius: 12px;
   padding: 20px;
   transition: all 0.3s ease;
+  min-width: 0; /* Allow grid items to shrink */
 }
 
 .chart-container:hover {
@@ -1434,6 +1435,118 @@
   font-size: 13px;
   color: #64748b;
   font-style: italic;
+}
+
+/* Modern Plotly Chart Styles */
+.plotly-chart {
+  width: 100%;
+  height: 280px; /* Smaller uniform size for supporting charts */
+  border-radius: 12px;
+  background: #f8fafc; /* Unified with card background */
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  min-width: 0; /* Allow grid items to shrink */
+}
+
+.plotly-chart-wide {
+  width: 100%;
+  height: 280px; /* Smaller uniform size for supporting charts */
+  border-radius: 12px;
+  background: #f8fafc; /* Unified with card background */
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  min-width: 0; /* Allow grid items to shrink */
+}
+
+/* Priority chart - full width */
+.plotly-chart-priority {
+  width: 100% !important;
+  height: 400px !important;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 2px solid rgba(148, 163, 184, 0.6); /* Slightly darker border for hero chart */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+  grid-column: 1 / -1; /* Span full width */
+  min-width: 0; /* Allow flex shrinking */
+}
+
+.plotly-chart-priority .main-svg {
+  width: 100% !important;
+}
+
+.plotly-chart-priority .plotly {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Priority chart container styling */
+/* Hero chart container - enhanced visual hierarchy */
+.priority-chart-container {
+  grid-column: 1 / -1; /* Span full width */
+  margin-bottom: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.priority-chart-container .chart-container {
+  width: 100%;
+  flex: 1;
+  /* Enhanced hero styling */
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  border: 2px solid #1e40af; /* Engineering blue border for prominence */
+  border-radius: 16px; /* Slightly more rounded for distinction */
+  box-shadow: 0 8px 32px rgba(30, 64, 175, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.priority-chart-container .chart-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(30, 64, 175, 0.18), 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Chart typography */
+.chart-title-bold {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+}
+
+.chart-header h4:not(.chart-title-bold) {
+  font-weight: 400;
+  font-size: 14px;
+  color: #475569;
+  margin: 0 0 8px 0;
+}
+
+/* Engineering-focused chart hover effects */
+.plotly-chart:hover,
+.plotly-chart-wide:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Custom Plotly theme overrides */
+.plotly-chart .modebar,
+.plotly-chart-wide .modebar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.plotly-chart .modebar-btn,
+.plotly-chart-wide .modebar-btn {
+  color: #64748b !important;
+}
+
+.plotly-chart .modebar-btn:hover,
+.plotly-chart-wide .modebar-btn:hover {
+  background: rgba(59, 130, 246, 0.1) !important;
+  color: #2563eb !important;
 }
 
 .chart-container canvas {

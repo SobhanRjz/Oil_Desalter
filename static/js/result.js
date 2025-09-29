@@ -304,12 +304,11 @@ class ProcessChartRenderer {
 
 const chartRenderer = new ProcessChartRenderer();
 
+// Legacy canvas chart function - DEPRECATED
+// These functions try to draw on canvas elements but our HTML has divs
+// This is kept for compatibility but should not be called
 function initProcessCharts() {
-  drawProcessChart1();
-  drawProcessChart2();
-  drawProcessChart3();
-  drawProcessChart4();
-  drawProcessChart5();
+  console.warn('initProcessCharts called but chart containers are divs, not canvas elements. Use modernChartRenderer instead.');
 }
 
 // Chart 1: Crude Flowrate vs Washwater Flowrate (User Input Range Compatible)
@@ -606,9 +605,14 @@ function toggleAdvancedCharts() {
     toggleIcon.textContent = '−';
     toggleIcon.style.transform = 'rotate(180deg)';
 
-    // Initialize charts if first time opening
+    // Initialize charts if first time opening - use modern charts only
     setTimeout(() => {
-      initializeAdvancedCharts();
+      if (typeof modernChartRenderer !== 'undefined') {
+        // Only initialize if containers are visible
+        requestAnimationFrame(() => {
+          modernChartRenderer.initializeModernCharts();
+        });
+      }
     }, 100);
   } else {
     advancedSection.style.display = 'none';
@@ -620,12 +624,14 @@ function toggleAdvancedCharts() {
 // Refresh all advanced charts
 function refreshAllCharts() {
   toast('Refreshing all advanced charts...');
-  initializeAdvancedCharts();
+  if (typeof modernChartRenderer !== 'undefined') {
+    modernChartRenderer.initializeModernCharts();
+  }
 }
 
-// Initialize all advanced charts
+// Initialize all advanced charts - DEPRECATED
 function initializeAdvancedCharts() {
-  initProcessCharts();
+  console.warn('initializeAdvancedCharts is deprecated. Use modernChartRenderer.initializeModernCharts() instead.');
 }
 
 // Chart 1: BS&W vs ppm (Chemical Dose vs Quality)
@@ -1499,19 +1505,19 @@ function updateOptimizationPanel() {
     console.error('Salt element not found');
   }
 
-  // Update secondary metrics
-  updateElement('mFlow', Math.round(userInputs.flowRate).toLocaleString());
-  updateElement('mPPM', calculationResults.optimizedPPM);
-  updateElement('mT', calculationResults.optimizedTemp);
-  updateElement('mV', calculationResults.optimizedVoltage);
-  updateElement('mWash', calculationResults.optimizedWash.toFixed(1));
+  // Update secondary metrics with units
+  updateElementWithUnit('mFlow', Math.round(userInputs.flowRate).toLocaleString(), 'BPD');
+  updateElementWithUnit('mPPM', calculationResults.optimizedPPM, 'ppm');
+  updateElementWithUnit('mT', calculationResults.optimizedTemp, '°C');
+  updateElementWithUnit('mV', calculationResults.optimizedVoltage, 'kVA');
+  updateElementWithUnit('mWash', calculationResults.optimizedWash.toFixed(1), '%');
 
   // Calculate and show deltas
   const baselineFlow = 30000;
   const baselinePPM = 70;
-  const baselineTemp = 130;
-  const baselineVoltage = 26;
-  const baselineWash = 3.0;
+  const baselineTemp = 120;
+  const baselineVoltage = 75;
+  const baselineWash = 2.0;
 
   updateDelta('mFlowΔ', userInputs.flowRate - baselineFlow, '');
   updateDelta('mPPMΔ', calculationResults.optimizedPPM - baselinePPM, '');
@@ -1544,6 +1550,21 @@ function updateElement(id, value, suffix = '') {
 
     // For strings and valid numbers, update the element
     element.textContent = value + suffix;
+  }
+}
+
+// Helper function to update elements while preserving unit spans
+function updateElementWithUnit(id, value, unit) {
+  const element = document.getElementById(id);
+  if (element) {
+    // Only check for NaN if value is actually a number
+    if (typeof value === 'number' && isNaN(value)) {
+      console.error('updateElementWithUnit: NaN number value for element', id, ':', value);
+      return;
+    }
+
+    // Update with HTML to preserve unit styling
+    element.innerHTML = `${value} <span class="metric-unit">${unit}</span>`;
   }
 }
 
@@ -1706,10 +1727,17 @@ document.addEventListener('DOMContentLoaded', () => {
   setupAutoRefresh();
   initializePredictiveMaintenance();
 
-  // Initialize process charts
+  // Initialize modern SVG charts - wait for containers to have proper dimensions
   setTimeout(() => {
-    initProcessCharts();
-  }, 100);
+    if (typeof modernChartRenderer !== 'undefined') {
+      // Wait for CSS grid and containers to be properly sized
+      requestAnimationFrame(() => {
+        modernChartRenderer.initializeModernCharts();
+      });
+    } else {
+      console.warn('modernChartRenderer not available - charts will not render');
+    }
+  }, 200);
 
   // Initialize advanced monitoring toggle with a slight delay to ensure DOM is fully ready
   setTimeout(() => {

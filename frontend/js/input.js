@@ -21,11 +21,11 @@ const ids = [
 // Defaults (used by Reset)
 const defaults = {
   spec_bsw: 0.5, spec_salt: 5.0, n_samples: 3000, flow_min: 20000, flow_max: 60000,
-  T_min: 105, T_max: 130, V_min: 22, V_max: 32,
+  T_min: 105, T_max: 130, V_min: 50, V_max: 100,
   ppm_min: 10, ppm_max: 90, wash_min: 0.5, wash_max: 4.0,
   use_minimize_wash: false,
   baseline_flow: 30000, baseline_demulsifier: 70, baseline_temp: 120,
-  baseline_voltage: 28, baseline_wash: 2.0
+  baseline_voltage: 75, baseline_wash: 2.0
 };
 
 // Restore from localStorage if present
@@ -34,6 +34,12 @@ const defaults = {
   if(!saved) return;
   try {
     const obj = JSON.parse(saved);
+
+    // Validate and update voltage/power values to new range if needed
+    if (obj.V_min < 50 || obj.V_min > 100) obj.V_min = 50;
+    if (obj.V_max < 50 || obj.V_max > 100) obj.V_max = 100;
+    if (obj.baseline_voltage < 50 || obj.baseline_voltage > 100) obj.baseline_voltage = 75;
+
     ids.forEach(k => {
       const el = $(k);
       if (el) {
@@ -104,7 +110,7 @@ function validate(p){
   if (p.baseline_flow < 1000 || p.baseline_flow > 100000) return 'Baseline flow must be between 1,000 and 100,000 BPD.';
   if (p.baseline_demulsifier < 1 || p.baseline_demulsifier > 200) return 'Baseline demulsifier must be between 1 and 200 ppm.';
   if (p.baseline_temp < 50 || p.baseline_temp > 200) return 'Baseline temperature must be between 50 and 200°C.';
-  if (p.baseline_voltage < 10 || p.baseline_voltage > 50) return 'Baseline voltage must be between 10 and 50 kV.';
+  if (p.baseline_voltage < 50 || p.baseline_voltage > 100) return 'Baseline voltage must be between 50 and 100 kVA.';
   if (p.baseline_wash < 0.1 || p.baseline_wash > 10) return 'Baseline wash must be between 0.1 and 10%.';
 
   return '';

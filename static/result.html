@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Desalter • Optimization Results</title>
   <link rel="stylesheet" href="./css/result.css" />
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 </head>
 <body>
   <!-- Top bar (you can replace with your site header) -->
@@ -58,21 +59,6 @@
 
       <!-- Secondary Services Grid -->
       <div class="secondary-services">
-        <!-- Monitoring Card -->
-        <div class="service-card monitoring-theme disabled" id="monitoring-card">
-          <div class="card-visual">
-            <div class="card-icon">📊</div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">Monitoring</h3>
-            <div class="card-tags">
-              <span class="tag">24/7</span>
-              <span class="tag">Cloud-based</span>
-            </div>
-            <p class="card-description">Real-time monitoring of throughput, energy consumption, and quality parameters.</p>
-            <button class="card-cta" onclick="activateTab('monitoring')">View Dashboard →</button>
-          </div>
-        </div>
 
         <!-- Prediction Card -->
         <div class="service-card prediction-theme" id="prediction-card">
@@ -180,8 +166,8 @@
             </div>
             <div class="metric-content">
               <div class="metric-label">Flow Rate</div>
-              <div class="metric-value" id="mFlow">60,000 <span class="metric-unit">BPD</span></div>
-              <div class="metric-delta up" id="mFlowΔ">+30,000</div>
+              <div class="metric-value" id="mFlow">30,000 <span class="metric-unit">BPD</span></div>
+              <div class="metric-delta neutral" id="mFlowΔ">0</div>
             </div>
           </div>
 
@@ -193,8 +179,8 @@
             </div>
             <div class="metric-content">
               <div class="metric-label">Demulsifier</div>
-              <div class="metric-value" id="mPPM">57 <span class="metric-unit">ppm</span></div>
-              <div class="metric-delta down" id="mPPMΔ">-13</div>
+              <div class="metric-value" id="mPPM">42 <span class="metric-unit">ppm</span></div>
+              <div class="metric-delta neutral" id="mPPMΔ">0</div>
             </div>
           </div>
 
@@ -206,8 +192,8 @@
             </div>
             <div class="metric-content">
               <div class="metric-label">Temperature</div>
-              <div class="metric-value" id="mT">111 <span class="metric-unit">°C</span></div>
-              <div class="metric-delta down" id="mTΔ">-9</div>
+              <div class="metric-value" id="mT">113 <span class="metric-unit">°C</span></div>
+              <div class="metric-delta down" id="mTΔ">-7</div>
             </div>
           </div>
 
@@ -219,8 +205,8 @@
             </div>
             <div class="metric-content">
               <div class="metric-label">Power</div>
-              <div class="metric-value" id="mV">28 <span class="metric-unit">kV</span></div>
-              <div class="metric-delta neutral" id="mVΔ">+0</div>
+              <div class="metric-value" id="mV">29 <span class="metric-unit">kVA</span></div>
+              <div class="metric-delta up" id="mVΔ">+1</div>
             </div>
           </div>
 
@@ -232,8 +218,8 @@
             </div>
             <div class="metric-content">
               <div class="metric-label">Wash Water</div>
-              <div class="metric-value" id="mWash">3.6 <span class="metric-unit">%</span></div>
-              <div class="metric-delta up" id="mWashΔ">+1.6</div>
+              <div class="metric-value" id="mWash">1.9 <span class="metric-unit">%</span></div>
+              <div class="metric-delta down" id="mWashΔ">-0.1</div>
             </div>
           </div>
         </div>
@@ -246,46 +232,40 @@
           </div>
 
           <div class="charts-grid">
-            <!-- Chart 1: Crude Flowrate vs Washwater Flowrate -->
-            <div class="chart-container">
-              <div class="chart-header">
-                <h4>Crude Flowrate vs Washwater Flowrate</h4>
-              </div>
-              <canvas id="processChart1" width="400" height="300"></canvas>
-            </div>
 
             <!-- Chart 2: Temperature vs Demulsifier -->
             <div class="chart-container">
               <div class="chart-header">
-                <h4>Temperature vs Demulsifier Requirement</h4>
+                <h4>Demulsifier Requirement vs Temperature</h4>
               </div>
-              <canvas id="processChart2" width="400" height="300"></canvas>
+              <div id="processChart2" class="plotly-chart"></div>
             </div>
 
             <!-- Chart 3: Crude Flowrate vs Temperature -->
             <div class="chart-container">
               <div class="chart-header">
-                <h4>Crude Flowrate vs Operating Temperature</h4>
+                <h4> Operating Temperature vs Crude Flowrate</h4>
               </div>
-              <canvas id="processChart3" width="400" height="300"></canvas>
+              <div id="processChart3" class="plotly-chart"></div>
             </div>
 
             <!-- Chart 4: Temperature vs Power -->
             <div class="chart-container">
               <div class="chart-header">
-                <h4>Temperature vs Power Consumption</h4>
+                <h4>Power Consumption vs Temperature</h4>
               </div>
-              <canvas id="processChart4" width="400" height="300"></canvas>
+              <div id="processChart4" class="plotly-chart"></div>
+            </div>
+
+            <!-- Chart 5: Parameter vs Quality Metrics (Dual Y-axis) -->
+            <div class="chart-container priority-chart-container">
+              <div class="chart-header">
+                <h4 class="chart-title-bold">Quality Metrics by Process Parameter</h4>
+              </div>
+              <div id="processChart5" class="plotly-chart-priority"></div>
             </div>
           </div>
 
-          <!-- Multi-parameter Chart -->
-          <div class="multi-chart-container">
-            <div class="chart-header">
-              <h4>Process Performance Analysis: BS&W and Salt Content</h4>
-            </div>
-            <canvas id="processChart5" width="800" height="400"></canvas>
-          </div>
         </div>
       </div>
 
@@ -708,59 +688,6 @@
           </div>
         </div>
 
-        <!-- Time to Breach -->
-        <div class="time-to-breach-section">
-          <h3>⏱️ Time to Breach (T50)</h3>
-
-          <div class="time-to-breach-grid">
-            <!-- BS&W Time to Breach -->
-            <div class="breach-time-card">
-              <div class="breach-time-header">
-                <div class="breach-time-icon">💧</div>
-                <div class="breach-time-info">
-                  <h4>BS&W Breach</h4>
-                  <div class="breach-time-desc">Time until 50% of  probability</div>
-                </div>
-              </div>
-              <div class="breach-time-value">
-                <div class="time-display" id="bswTimeToBreach">— min</div>
-                <div class="time-status safe">Safe</div>
-              </div>
-              <div class="breach-time-visual">
-                <div class="time-gauge">
-                  <div class="time-gauge-fill" id="bswTimeGauge" style="--percentage: 100"></div>
-                  <div class="time-gauge-center">
-                    <div class="time-gauge-needle" id="bswTimeNeedle" style="--rotation: 0deg"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Salt Time to Breach -->
-            <div class="breach-time-card">
-              <div class="breach-time-header">
-                <div class="breach-time-icon">🧂</div>
-                <div class="breach-time-info">
-                  <h4>Salt Breach</h4>
-                  <div class="breach-time-desc">Time until 50% of breach probability</div>
-                </div>
-              </div>
-              <div class="breach-time-value">
-                <div class="time-display" id="saltTimeToBreach">— min</div>
-                <div class="time-status excellent">Excellent</div>
-              </div>
-              <div class="breach-time-visual">
-                <div class="time-gauge">
-                  <div class="time-gauge-fill" id="saltTimeGauge" style="--percentage: 100"></div>
-                  <div class="time-gauge-center">
-                    <div class="time-gauge-needle" id="saltTimeNeedle" style="--rotation: 0deg"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- What-If Scenario -->
         <div class="what-if-section">
           <h3>🔮 What-If Scenario Analysis</h3>
@@ -969,7 +896,7 @@
             </div>
             <div class="health-info">
               <h3>Desalter Health Status</h3>
-              <p class="health-description">Overall system health is <span class="health-status">Good</span> with minor optimization opportunities.</p>
+              <p class="health-description">Overall system health is <span class="health-status">Normal</span> with minor optimization opportunities.</p>
               <div class="health-metrics">
                 <div class="metric-item">
                   <span class="metric-label">Downtime Risk:</span>
@@ -1023,8 +950,8 @@
                 <tr>
                   <td>Electrodes A</td>
                   <td>Electrical</td>
-                  <td><span class="health-score warn">71</span></td>
-                  <td><span class="risk-badge medium">Medium</span></td>
+                  <td><span class="health-score ok">71</span></td>
+                  <td><span class="risk-badge low">Low</span></td>
                   <td>High</td>
                   <td>Fouling</td>
                   <td>12 days</td>
@@ -1045,8 +972,8 @@
                 <tr>
                   <td>Demulsifier Pump</td>
                   <td>Chemical</td>
-                  <td><span class="health-score danger">23</span></td>
-                  <td><span class="risk-badge high">High</span></td>
+                  <td><span class="health-score warn">23</span></td>
+                  <td><span class="risk-badge medium">Medium</span></td>
                   <td>Critical</td>
                   <td>Clogging</td>
                   <td>7 days</td>
@@ -1056,8 +983,8 @@
                 <tr>
                   <td>Mixing Valve V9</td>
                   <td>Process</td>
-                  <td><span class="health-score warn">56</span></td>
-                  <td><span class="risk-badge medium">Medium</span></td>
+                  <td><span class="health-score ok">56</span></td>
+                  <td><span class="risk-badge low">Low</span></td>
                   <td>Medium</td>
                   <td>Erosion</td>
                   <td>28 days</td>
@@ -1065,10 +992,10 @@
                   <td><button class="btn-xs action-btn">Inspect</button></td>
                 </tr>
                 <tr>
-                  <td>Wash Water pump</td>
+                  <td>Wash Water Pump</td>
                   <td>Mechanical</td>
-                  <td><span class="health-score danger">34</span></td>
-                  <td><span class="risk-badge high">High</span></td>
+                  <td><span class="health-score warn">34</span></td>
+                  <td><span class="risk-badge medium">Medium</span></td>
                   <td>Critical</td>
                   <td>Contamination</td>
                   <td>10 days</td>
@@ -1076,7 +1003,7 @@
                   <td><button class="btn-xs action-btn urgent">Service</button></td>
                 </tr>
                 <tr>
-                  <td>Sacrificial anodes</td>
+                  <td>Sacrificial Anodes</td>
                   <td>Integrity</td>
                   <td><span class="health-score danger">19</span></td>
                   <td><span class="risk-badge high">High</span></td>
@@ -1087,10 +1014,10 @@
                   <td><button class="btn-xs action-btn urgent">Replace</button></td>
                 </tr>
                 <tr>
-                  <td>Level control valve</td>
+                  <td>Level Control Valve</td>
                   <td>Process</td>
-                  <td><span class="health-score warn">67</span></td>
-                  <td><span class="risk-badge medium">Medium</span></td>
+                  <td><span class="health-score ok">67</span></td>
+                  <td><span class="risk-badge low">Low</span></td>
                   <td>Medium</td>
                   <td>Actuator</td>
                   <td>35 days</td>
@@ -1131,7 +1058,7 @@
                   <div class="component-icon">🔌</div>
                   <div class="component-info">
                     <h5>Electrodes</h5>
-                    <div class="component-status warn">Degrading</div>
+                    <div class="component-status ok">Normal</div>
                   </div>
                   <div class="component-score">71</div>
                 </div>
@@ -1150,7 +1077,7 @@
                   <div class="component-icon">🔧</div>
                   <div class="component-info">
                     <h5>Transformer</h5>
-                    <div class="component-status danger">Critical</div>
+                    <div class="component-status ok">Normal</div>
                   </div>
                   <div class="component-score">89</div>
                 </div>
@@ -1175,13 +1102,13 @@
                   <div class="component-icon">💧</div>
                   <div class="component-info">
                     <h5>Demulsifier System</h5>
-                    <div class="component-status ok">Good</div>
+                    <div class="component-status warn">Medium</div>
                   </div>
                   <div class="component-score">23</div>
                 </div>
                 <div class="component-metrics">
                   <div class="metric">Flow Consistency: <span id="demulsifierFlow">98%</span></div>
-                  <div class="metric">Pump Health: <span id="demulsifierPump">Good</span></div>
+                  <div class="metric">Pump Health: <span id="demulsifierPump">Normal</span></div>
                   <div class="metric">ETA: <span id="demulsifierETA">45 days</span></div>
                 </div>
                 <div class="component-trend">
@@ -1194,7 +1121,7 @@
                   <div class="component-icon">🔄</div>
                   <div class="component-info">
                     <h5>Mixing System</h5>
-                    <div class="component-status warn">Monitor</div>
+                    <div class="component-status ok">Normal</div>
                   </div>
                   <div class="component-score">56</div>
                 </div>
@@ -1219,12 +1146,12 @@
                   <div class="component-icon">🌊</div>
                   <div class="component-info">
                     <h5>Wash Water</h5>
-                    <div class="component-status ok">Good</div>
+                    <div class="component-status warn">Medium</div>
                   </div>
                   <div class="component-score">34</div>
                 </div>
                 <div class="component-metrics">
-                  <div class="metric">Contamination: <span id="washContamination">Low</span></div>
+                  <div class="metric">Contamination: <span id="washContamination">Normal</span></div>
                   <div class="metric">Flow Rate: <span id="washFlow">Stable</span></div>
                   <div class="metric">ETA: <span id="washETA">60 days</span></div>
                 </div>
@@ -1238,7 +1165,7 @@
                   <div class="component-icon">🛢️</div>
                   <div class="component-info">
                     <h5>Crude Inlet</h5>
-                    <div class="component-status ok">Stable</div>
+                    <div class="component-status warn">Medium</div>
                   </div>
                   <div class="component-score">28</div>
                 </div>
@@ -1263,13 +1190,13 @@
                   <div class="component-icon">⚠️</div>
                   <div class="component-info">
                     <h5>Corrosion Monitoring</h5>
-                    <div class="component-status ok">Good</div>
+                    <div class="component-status danger">Critical</div>
                   </div>
                   <div class="component-score">19</div>
                 </div>
                 <div class="component-metrics">
                   <div class="metric">Metal Loss: <span id="corrosionLoss">0.02mm/year</span></div>
-                  <div class="metric">Probe Health: <span id="corrosionProbe">Good</span></div>
+                  <div class="metric">Probe Health: <span id="corrosionProbe">Normal</span></div>
                   <div class="metric">ETA: <span id="corrosionETA">180 days</span></div>
                 </div>
                 <div class="component-trend">
@@ -1282,7 +1209,7 @@
                   <div class="component-icon">🎛️</div>
                   <div class="component-info">
                     <h5>Control Loops</h5>
-                    <div class="component-status warn">Monitor</div>
+                    <div class="component-status ok">Normal</div>
                   </div>
                   <div class="component-score">67</div>
                 </div>
@@ -1405,6 +1332,7 @@
   </footer>
 
   <script src="./js/result.js"></script>
+  <script src="./js/modern-charts.js"></script>
 </body>
 </html>
 

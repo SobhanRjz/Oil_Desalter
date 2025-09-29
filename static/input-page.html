@@ -126,7 +126,7 @@
               <div class="priority-item card-pro" draggable="true" data-priority="5">
                 <span class="priority-number">5</span>
                 <span class="priority-icon">💧</span>
-                <span class="priority-text">Minimize Wash</span>
+                <span class="priority-text">Minimize Wash Water</span>
                 <span class="drag-handle">⋮⋮</span>
               </div>
             </div>
@@ -152,10 +152,7 @@
             <div class="parameter-card card-pro" "8">
               <div class="parameter-header">
                 <div class="parameter-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 14.828V6.172C19 5.525 18.552 5 18 5H6c-.552 0-1 .525-1 1.172v8.656C5 15.475 5.448 16 6 16h12c.552 0 1-.525 1-1.172z"/>
-                    <path d="M12 12v4M8 12v4m8-4v4"/>
-                  </svg>
+                  📈
                 </div>
                 <h3>Capacity</h3>
               </div>
@@ -181,9 +178,7 @@
             <div class="parameter-card card-pro" "9">
               <div class="parameter-header">
                 <div class="parameter-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/>
-                  </svg>
+                  🌡️
                 </div>
                 <h3>Temperature</h3>
               </div>
@@ -209,9 +204,7 @@
             <div class="parameter-card card-pro" "10">
               <div class="parameter-header">
                 <div class="parameter-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                  </svg>
+                  ⚡
                 </div>
                 <h3>Power</h3>
               </div>
@@ -219,14 +212,14 @@
                 <label class="input-group">
                   <span class="input-label">Min Power</span>
                   <div class="input-with-unit">
-                    <input type="number" id="V_min" step="1" value="22" class="input-field" />
+                    <input type="number" id="V_min" step="1" value="50" min="50" max="100" class="input-field" />
                     <span class="unit">kVA</span>
                   </div>
                 </label>
                 <label class="input-group">
                   <span class="input-label">Max Power</span>
                   <div class="input-with-unit">
-                    <input type="number" id="V_max" step="1" value="32" class="input-field" />
+                    <input type="number" id="V_max" step="1" value="100" min="50" max="100" class="input-field" />
                     <span class="unit">kVA</span>
                   </div>
                 </label>
@@ -292,8 +285,8 @@
         </section>
 
         <!-- CURRENT VALUES -->
-        <section class="config-section disabled">
-          <div class="section-header disabled">
+        <section class="config-section">
+          <div class="section-header">
             <div class="section-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
@@ -305,7 +298,7 @@
             </div>
           </div>
 
-          <div class="parameter-card baseline-wide card-pro" "13">
+          <div class="parameter-card baseline-wide card-pro disabled" "13">
             <div class="parameter-header">
               <div class="parameter-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -322,7 +315,7 @@
                       <label class="input-group">
                         <span class="input-label">inlet wet crude oil</span>
                         <div class="input-with-unit">
-                          <input type="number" id="baseline_flow" step="1000" value="30000" class="input-field baseline-input" />
+                          <input type="number" id="baseline_flow" step="1000" value="30000" class="input-field baseline-input" disabled />
                           <span class="unit">BPD</span>
                         </div>
                       </label>
@@ -331,7 +324,7 @@
                       <label class="input-group">
                         <span class="input-label">Demulsifier (ppm)</span>
                         <div class="input-with-unit">
-                          <input type="number" id="baseline_demulsifier" step="1" value="70" class="input-field baseline-input" />
+                          <input type="number" id="baseline_demulsifier" step="1" value="70" class="input-field baseline-input" disabled />
                           <span class="unit">ppm</span>
                         </div>
                       </label>
@@ -344,7 +337,7 @@
                       <label class="input-group">
                         <span class="input-label">Temperature (°C)</span>
                         <div class="input-with-unit">
-                          <input type="number" id="baseline_temp" step="1" value="120" class="input-field baseline-input" />
+                          <input type="number" id="baseline_temp" step="1" value="120" class="input-field baseline-input" disabled />
                           <span class="unit">°C</span>
                         </div>
                       </label>
@@ -353,7 +346,7 @@
                       <label class="input-group">
                         <span class="input-label">power (kVA)</span>
                         <div class="input-with-unit">
-                          <input type="number" id="baseline_voltage" step="1" value="28" class="input-field baseline-input" />
+                          <input type="number" id="baseline_voltage" step="1" value="75" min="50" max="100" class="input-field baseline-input" disabled />
                           <span class="unit">kVA</span>
                         </div>
                       </label>
@@ -366,7 +359,7 @@
                       <label class="input-group">
                         <span class="input-label">Wash water(vol.%)</span>
                         <div class="input-with-unit">
-                          <input type="number" id="baseline_wash" step="0.1" value="2.0" class="input-field baseline-input" />
+                          <input type="number" id="baseline_wash" step="0.1" value="2.0" class="input-field baseline-input" disabled />
                           <span class="unit">%</span>
                         </div>
                       </label>
