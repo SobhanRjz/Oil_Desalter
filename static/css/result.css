@@ -41,6 +41,18 @@
     display:grid; place-items:center; font-weight:800;
     box-shadow: 0 4px 12px rgba(37,99,235,.2);
   }
+
+  .brand .logo-image{
+    width:48px; height:48px; border-radius:12px;
+    object-fit: contain;
+    box-shadow: 0 4px 12px rgba(37,99,235,.2);
+  }
+
+  .card-logo{
+    width:20px; height:20px; border-radius:4px;
+    object-fit: contain;
+    box-shadow: 0 2px 6px rgba(37,99,235,.1);
+  }
   .brand span{font-weight:600; letter-spacing:.2px}
   
   .tabs{
@@ -1312,14 +1324,15 @@
 
 .metric-icon {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: #f8fafc;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #64748b;
+  font-size: 24px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: white;
 }
 
 .metric-content {

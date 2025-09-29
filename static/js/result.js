@@ -466,7 +466,7 @@ function drawProcessChart4() {
   
   // User input ranges: Temperature 105-130°C, Power 22-32 kVA
   const tempMin = 105, tempMax = 130;
-  const powerMin = 22, powerMax = 32;
+  const powerMin = 50, powerMax = 100;
   
   const dataPoints = [];
   const trendPoints = [];
@@ -936,9 +936,6 @@ function setupAutoRefresh() {
 
 // Initialize Predictive Maintenance Dashboard
 function initializePredictiveMaintenance() {
-  // Draw component trend charts
-  drawComponentTrends();
-
   // Draw fouling risk chart
   drawFoulingChart();
 
@@ -958,81 +955,6 @@ function initializePredictiveMaintenance() {
   setInterval(updateMaintenanceMetrics, 30000); // Update every 30 seconds
 }
 
-// Draw trend charts for each component
-function drawComponentTrends() {
-  // Electrodes trend
-  drawTrendChart('electrodeTrend', [15, 18, 12, 22, 19, 25, 28], '#f59e0b');
-
-  // Transformer trend
-  drawTrendChart('transformerTrend', [85, 87, 89, 91, 88, 92, 89], '#ef4444');
-
-  // Demulsifier trend
-  drawTrendChart('demulsifierTrend', [20, 18, 15, 12, 10, 8, 23], '#10b981');
-
-  // Mixing trend
-  drawTrendChart('mixingTrend', [45, 52, 48, 58, 55, 62, 56], '#f59e0b');
-
-  // Wash water trend
-  drawTrendChart('washTrend', [30, 28, 25, 32, 29, 26, 34], '#10b981');
-
-  // Crude inlet trend
-  drawTrendChart('crudeTrend', [25, 22, 28, 26, 30, 27, 28], '#10b981');
-
-  // Corrosion trend
-  drawTrendChart('corrosionTrend', [15, 12, 10, 8, 6, 9, 19], '#10b981');
-
-  // Control trend
-  drawTrendChart('controlTrend', [60, 65, 62, 68, 64, 70, 67], '#f59e0b');
-}
-
-// Generic trend chart drawing function
-function drawTrendChart(canvasId, data, color) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  const width = canvas.width;
-  const height = canvas.height;
-
-  // Clear canvas
-  ctx.clearRect(0, 0, width, height);
-
-  // Find min/max for scaling
-  const max = Math.max(...data);
-  const min = Math.min(...data);
-  const range = max - min || 1;
-
-  // Draw trend line
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-  ctx.beginPath();
-
-  data.forEach((value, index) => {
-    const x = (index / (data.length - 1)) * (width - 20) + 10;
-    const y = height - ((value - min) / range) * (height - 20) + 10;
-
-    if (index === 0) {
-      ctx.moveTo(x, y);
-    } else {
-      ctx.lineTo(x, y);
-    }
-  });
-
-  ctx.stroke();
-
-  // Draw data points
-  ctx.fillStyle = color;
-  data.forEach((value, index) => {
-    const x = (index / (data.length - 1)) * (width - 20) + 10;
-    const y = height - ((value - min) / range) * (height - 20) + 10;
-
-    ctx.beginPath();
-    ctx.arc(x, y, 3, 0, Math.PI * 2);
-    ctx.fill();
-  });
-}
 
 // Draw fouling risk chart
 function drawFoulingChart() {
@@ -1149,6 +1071,9 @@ function updateOverallHealth() {
     } else if (avgScore >= 60) {
       statusElement.textContent = 'Warning';
       statusElement.style.color = '#f59e0b';
+    } else if (avgScore >= 40) {
+      statusElement.textContent = 'Medium';
+      statusElement.style.color = '#f97316'; // Orange color for medium
     } else {
       statusElement.textContent = 'Critical';
       statusElement.style.color = '#ef4444';
@@ -1346,7 +1271,6 @@ function initializeAdvancedMonitoringToggle() {
 // Initialize components within advanced monitoring
 function initializeAdvancedMonitoringComponents() {
   // Re-initialize any charts or dynamic content within advanced monitoring
-  drawComponentTrends();
   drawFoulingChart();
   updateMaintenanceCalendar();
 }
@@ -1975,10 +1899,12 @@ function runWhatIfSimulation() {
 // Update simulation results
 function updateSimulationResults() {
   // Simulate realistic prediction changes based on parameter adjustments
+  // Temperature up = salt and BS&W down = improvement up
+  // Wash water up = salt down = improvement better
   const ppmChange = (document.getElementById('whatIfPPM').value - 64.07) * 0.001;
-  const tempChange = (document.getElementById('whatIfTemp').value - 115.00) * 0.002;
+  const tempChange = (document.getElementById('whatIfTemp').value - 115.00) * -0.002; // Negative = improvement
   const voltageChange = (document.getElementById('whatIfVoltage').value - 27.86) * 0.003;
-  const washChange = (document.getElementById('whatIfWash').value - 1.8) * 0.005;
+  const washChange = (document.getElementById('whatIfWash').value - 1.8) * -0.005; // Negative = improvement
   const flowChange = (document.getElementById('whatIfFlow').value - 31963.11) * 0.000001;
 
   const totalChange = ppmChange + tempChange + voltageChange + washChange + flowChange;
@@ -2315,33 +2241,6 @@ function updateSaltPredictionChart() {
   // Draw data points for better visualization
   drawDataPoints(ctx, currentData, width, height, '#64748b', '#ffffff', 1.0);
   drawDataPoints(ctx, scenarioData, width, height, '#2563eb', '#ffffff', 1.0);
-
-  // Add prediction metrics overlay
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(width - 200, 20, 180, 120);
-  ctx.strokeStyle = '#e5e7eb';
-  ctx.lineWidth = 1;
-  ctx.strokeRect(width - 200, 20, 180, 120);
-
-  ctx.fillStyle = '#1f2937';
-  ctx.font = 'bold 12px Inter, sans-serif';
-  ctx.textAlign = 'left';
-  ctx.fillText('Salt Prediction Results', width - 190, 40);
-
-  ctx.font = '11px Inter, sans-serif';
-  ctx.fillStyle = '#6b7280';
-  const avgCurrent = currentData.reduce((a, b) => a + b, 0) / currentData.length;
-  const avgScenario = scenarioData.reduce((a, b) => a + b, 0) / scenarioData.length;
-  const improvement = ((avgCurrent - avgScenario) / avgCurrent * 100);
-
-  ctx.fillText(`Current Avg: ${avgCurrent.toFixed(3)} PTB`, width - 190, 60);
-  ctx.fillText(`Scenario Avg: ${avgScenario.toFixed(3)} PTB`, width - 190, 75);
-  
-  ctx.fillStyle = improvement > 0 ? '#16a34a' : '#dc2626';
-  ctx.fillText(`Change: ${improvement > 0 ? '-' : '+'}${Math.abs(improvement).toFixed(1)}%`, width - 190, 90);
-  
-  ctx.fillStyle = improvement > 0 ? '#16a34a' : '#dc2626';
-  ctx.fillText(improvement > 0 ? 'Improvement' : 'Degradation', width - 190, 105);
 }
 
 // Update what-if chart with simulation data
@@ -2387,13 +2286,28 @@ function updateWhatIfChart() {
   const scenarioWash = washElement ? parseFloat(washElement.value) || currentWash : currentWash;
   const scenarioFlow = flowElement ? parseFloat(flowElement.value) || currentFlow : currentFlow;
 
-  // Calculate parameter impacts with enhanced coefficients for better visibility
-  const ppmImpact = (scenarioPPM - currentPPM) * -0.003;
-  const tempImpact = (scenarioTemp - currentTemp) * -0.004; // Higher temp = lower BSW
-  const voltageImpact = (scenarioVoltage - currentVoltage) * -0.02;
-  const washImpact = (scenarioWash - currentWash) * -0.04; // More wash = lower BSW
-  const flowImpact = (scenarioFlow - currentFlow) * 0.000003; // Higher flow = slightly higher BSW
+  // Calculate parameter impacts with reasonable coefficients for realistic simulation
+  const ppmImpact = (scenarioPPM - currentPPM) * -0.0003; // Much smaller coefficient
+  const tempImpact = (scenarioTemp - currentTemp) * -0.0004; // Higher temp = lower BSW, smaller coefficient
+  const voltageImpact = (scenarioVoltage - currentVoltage) * -0.002; // Much smaller coefficient
+  const washImpact = (scenarioWash - currentWash) * -0.004; // More wash = lower BSW, smaller coefficient
+  const flowImpact = (scenarioFlow - currentFlow) * 0.0000003; // Much smaller coefficient
   const totalScenarioImpact = ppmImpact + tempImpact + voltageImpact + washImpact + flowImpact;
+
+  // Debug logging
+  console.log('What-if chart impacts:', {
+    ppm: ppmImpact,
+    temp: tempImpact,
+    voltage: voltageImpact,
+    wash: washImpact,
+    flow: flowImpact,
+    total: totalScenarioImpact,
+    baseValue: baseValue
+  });
+
+  // Clamp the total impact to reasonable bounds (±20% of base value)
+  const maxImpact = Math.abs(baseValue) * 0.2;
+  const clampedImpact = Math.max(-maxImpact, Math.min(maxImpact, totalScenarioImpact));
 
   // Generate 24-hour data points with realistic variations
   for (let i = 0; i <= 24; i++) {
@@ -2406,8 +2320,8 @@ function updateWhatIfChart() {
     const currentValue = Math.max(0.0, Math.min(0.8, baseValue + timeVariation));
     currentData.push(currentValue);
 
-    // Scenario with what-if parameters
-    const scenarioValue = Math.max(0.0, Math.min(0.8, baseValue + totalScenarioImpact + timeVariation * 0.7));
+    // Scenario with what-if parameters (using clamped impact for reasonable values)
+    const scenarioValue = Math.max(0.0, Math.min(0.8, baseValue + clampedImpact + timeVariation * 0.7));
     scenarioData.push(scenarioValue);
   }
 
@@ -2420,59 +2334,6 @@ function updateWhatIfChart() {
   // Draw data points for better visualization
   drawDataPoints(ctx, currentData, width, height, '#64748b', '#ffffff');
   drawDataPoints(ctx, scenarioData, width, height, '#2563eb', '#ffffff');
-
-  // Add prediction metrics overlay (matching the card display)
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(width - 200, 20, 180, 120);
-  ctx.strokeStyle = '#e5e7eb';
-  ctx.lineWidth = 1;
-  ctx.strokeRect(width - 200, 20, 180, 120);
-
-  ctx.fillStyle = '#1f2937';
-  ctx.font = 'bold 12px Inter, sans-serif';
-  ctx.textAlign = 'left';
-  ctx.fillText('Prediction Results', width - 190, 40);
-
-  ctx.font = '11px Inter, sans-serif';
-  ctx.fillStyle = '#374151';
-
-  // Get current prediction values from the card elements
-  const predictedBswElement = document.getElementById('predictedBSW');
-  const bswChangeElement = document.getElementById('bswChange');
-  const predictedSaltElement = document.getElementById('predictedSalt');
-  const saltChangeElement = document.getElementById('saltChange');
-  const breachRiskElement = document.getElementById('breachRiskChange');
-  const riskDirectionElement = document.getElementById('riskDirection');
-  const efficiencyElement = document.getElementById('efficiencyImpact');
-  const efficiencyDirectionElement = document.getElementById('efficiencyDirection');
-
-  const bswValue = predictedBswElement ? predictedBswElement.textContent : '0.44%';
-  const bswChange = bswChangeElement ? bswChangeElement.textContent : '+0.00%';
-  const saltValue = predictedSaltElement ? predictedSaltElement.textContent : '0.20 PTB';
-  const saltChange = saltChangeElement ? saltChangeElement.textContent : '+0.00 PTB';
-  const breachRisk = breachRiskElement ? breachRiskElement.textContent : '+0.2%';
-  const riskDirection = riskDirectionElement ? riskDirectionElement.textContent : 'Stable';
-  const efficiency = efficiencyElement ? efficiencyElement.textContent : '+0.4%';
-  const efficiencyDirection = efficiencyDirectionElement ? efficiencyDirectionElement.textContent : 'Improved';
-
-  ctx.fillText(`BS&W: ${bswValue} ${bswChange}`, width - 190, 60);
-  ctx.fillText(`Salt: ${saltValue} ${saltChange}`, width - 190, 75);
-  ctx.fillText(`Breach Risk: ${breachRisk} ${riskDirection}`, width - 190, 90);
-  ctx.fillText(`Efficiency: ${efficiency} ${efficiencyDirection}`, width - 190, 105);
-
-  // Add improvement annotation if significant change
-  if (Math.abs(totalScenarioImpact) > 0.002) {
-    const isImprovement = totalScenarioImpact < 0; // Lower BSW is better
-    const improvement = isImprovement ? 'Improvement' : 'Degradation';
-    const changePercent = Math.abs(totalScenarioImpact / baseValue * 100);
-
-    ctx.fillStyle = isImprovement ? '#10b981' : '#ef4444';
-    ctx.font = 'bold 12px Inter, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(`${improvement}: ${changePercent.toFixed(1)}%`, width / 2, 50);
-  }
-
-  console.log('Chart updated with data points:', currentData.length, scenarioData.length);
 
 }
 

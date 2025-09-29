@@ -655,25 +655,25 @@ class ModernChartRenderer {
   initializeModernCharts() {
     // Wait for containers to be visible and properly sized
     const checkAndDraw = () => {
-      const chart2Container = document.getElementById('processChart2');
-      if (!chart2Container) {
+      const chart1Container = document.getElementById('processChart1');
+      if (!chart1Container) {
         console.warn('Chart containers not found');
         return;
       }
       
       // Check if container has proper dimensions
-      const containerWidth = chart2Container.offsetWidth;
+      const containerWidth = chart1Container.offsetWidth;
       if (containerWidth === 0) {
         // Container not ready, wait a bit more
         setTimeout(checkAndDraw, 50);
         return;
       }
       
-      // Containers are ready, draw charts (only existing ones)
+      // Containers are ready, draw charts
+      this.drawProcessChart1();
       this.drawProcessChart2();
       this.drawProcessChart3();
       this.drawProcessChart4();
-      this.drawProcessChart5();
     };
     
     checkAndDraw();
