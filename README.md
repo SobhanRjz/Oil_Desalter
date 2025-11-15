@@ -2,6 +2,8 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue)](https://sobhanrjz.github.io/Oil_Desalter/)
 
+**Live Demo:** https://sobhanrjz.github.io/Oil_Desalter/
+
 A minimal landing page with a full-screen background video, centered title, and a call-to-action button. FastAPI serves the static frontend and exposes a small `/api/ping` endpoint.
 
 ## Project Structure
