@@ -6,7 +6,7 @@ services:
       target: development
     container_name: desalter_dev
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:38001:8000"
     volumes:
       # Mount source code for hot reload
       - ../../backend:/app/backend

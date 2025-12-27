@@ -25,6 +25,15 @@ Docker Compose uses project names to isolate different environments and avoid co
 
 All commands include the `-p` (project name) flag to ensure proper isolation.
 
+## Port Configuration
+
+This project uses unique ports to avoid conflicts with other projects:
+
+- **Development/Production Direct**: `18101` (host) → `8000` (container)
+- **Production with Nginx**: `80` (HTTP) and `443` (HTTPS)
+
+The host port `18101` was chosen as a unique, high-numbered port that's unlikely to conflict with common services.
+
 ## Prerequisites
 
 - Docker Engine 20.10+
@@ -41,7 +50,7 @@ cd infra/docker
 docker compose -f docker-compose.dev.yml -p desalter_dev up --build -d
 ```
 
-Access the application at: http://127.0.0.1:8000
+Access the application at: http://127.0.0.1:18101
 
 Features:
 - Hot reload enabled (code changes reflect immediately)
@@ -54,10 +63,10 @@ Run the application in production mode without nginx:
 
 ```bash
 cd infra/docker
-docker-compose -f docker-compose.prod.yml up --build -d
+docker-compose -f docker-compose.prod.yml -p desalter_prod up --build -d
 ```
 
-Access the application at: http://127.0.0.1:8000
+Access the application at: http://127.0.0.1:18101
 
 Features:
 - Optimized production build
@@ -161,7 +170,7 @@ Available variables:
 ### Application Health Check
 
 ```bash
-curl http://127.0.0.1:8000/api/ping
+curl http://127.0.0.1:18101/api/ping
 ```
 
 Expected response:
@@ -212,21 +221,21 @@ All services are connected via the `desalter_network` bridge network, allowing i
 
 ### Port Already in Use
 
-If port 8000 or 80 is already in use:
+If port 18101 or 80 is already in use:
 
 ```bash
 # Find process using the port
 # Windows
-netstat -ano | findstr :8000
+netstat -ano | findstr :18101
 
 # Linux/Mac
-lsof -i :8000
+lsof -i :18101
 
 # Change port in docker-compose file
 services:
   desalter:
     ports:
-      - "127.0.0.1:8001:8000"  # Map to different host port
+      - "127.0.0.1:18102:8000"  # Map to different host port
 ```
 
 ### Container Won't Start
