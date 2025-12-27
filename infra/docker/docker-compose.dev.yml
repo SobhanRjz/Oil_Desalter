@@ -1,0 +1,26 @@
+services:
+  desalter:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile
+      target: development
+    container_name: desalter_dev
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      # Mount source code for hot reload
+      - ../../backend:/app/backend
+      - ../../frontend:/app/frontend
+      - ../../launcher.py:/app/launcher.py
+    environment:
+      - ENVIRONMENT=development
+      - LOG_LEVEL=debug
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    networks:
+      - desalter_network
+
+networks:
+  desalter_network:
+    driver: bridge
+

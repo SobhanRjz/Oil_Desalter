@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  desalter:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile
+      target: production
+    container_name: desalter_prod
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=info
+      - PYTHONUNBUFFERED=1
+    restart: always
+    networks:
+      - desalter_network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+networks:
+  desalter_network:
+    driver: bridge
+

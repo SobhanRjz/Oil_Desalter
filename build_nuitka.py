@@ -5,8 +5,18 @@ import os
 from pathlib import Path
 
 def build_nuitka_standalone():
-    """Build with Nuitka standalone mode (recommended)."""
+    """Build with Nuitka standalone mode with antivirus-friendly settings."""
     project_root = Path(__file__).parent
+    
+    # Check if icon exists, if not, skip icon parameter
+    icon_path = project_root / "frontend/assets/Logo.jpg"
+    icon_args = []
+    if icon_path.exists():
+        icon_args = ["--windows-icon-from-ico=frontend/assets/Logo.jpg"]
+        print(f"📱 Using icon: {icon_path}")
+    else:
+        print("⚠️ Icon file not found, building without icon")
+    
     cmd = [
         sys.executable, "-m", "nuitka",
         "--standalone",
@@ -15,11 +25,20 @@ def build_nuitka_standalone():
         "--output-filename=desalter.exe",
         "--include-data-dir=frontend=frontend",
         "--include-data-dir=backend=backend",
+        # Antivirus-friendly flags
+        "--windows-company-name=Desalter Solutions",
+        "--windows-product-name=Desalter Oil Processing Tool",
+        "--windows-file-version=1.0.0.0",
+        "--windows-product-version=1.0.0",
+        "--windows-file-description=Oil and Gas Desalter Optimization Tool",
+        "--windows-icon-from-ico=frontend/assets/Logo.jpg",
+
+        "--no-pyi-file",
         "--assume-yes-for-downloads",
         "--show-progress",
         "--show-scons",
         "launcher.py"
-    ]
+    ] + icon_args
 
     print("🚀 Building with Nuitka (Standalone + Onefile)...")
     print("Command:", " ".join(cmd))
@@ -113,6 +132,53 @@ def install_nuitka():
         print("❌ Failed to install Nuitka")
         return False
 
+def build_antivirus_safe():
+    """Build with maximum antivirus compatibility."""
+    project_root = Path(__file__).parent
+    
+    # Check if icon exists, if not, skip icon parameter
+    icon_path = project_root / "frontend/assets/Logo.jpg"
+    icon_args = []
+    if icon_path.exists():
+        icon_args = ["--windows-icon-from-ico=frontend/assets/Logo.jpg"]
+        print(f"📱 Using icon: {icon_path}")
+    else:
+        print("⚠️ Icon file not found, building without icon")
+    
+    cmd = [
+        sys.executable, "-m", "nuitka",
+        "--standalone",
+        "--onefile",
+        "--output-dir=dist",
+        "--output-filename=desalter.exe",
+        "--include-data-dir=frontend=frontend",
+        "--include-data-dir=backend=backend",
+        # Maximum AV compatibility
+        "--windows-company-name=Desalter Solutions",
+        "--windows-product-name=Desalter Oil Processing Tool",
+        "--windows-file-version=1.0.0.0",
+        "--windows-product-version=1.0.0",
+        "--windows-file-description=Oil and Gas Desalter Optimization Tool",
+        "--disable-console",
+        "--no-compression",  # Disable all compression
+        "--no-pyi-file",
+        "--windows-uac-admin",  # Request admin rights explicitly
+        "--assume-yes-for-downloads",
+        "--show-progress",
+        "launcher.py"
+    ] + icon_args
+
+    print("🛡️ Building with Maximum Antivirus Compatibility...")
+    print("Command:", " ".join(cmd))
+    print("=" * 60)
+
+    try:
+        result = subprocess.run(cmd, cwd=str(project_root))
+        return result.returncode == 0
+    except KeyboardInterrupt:
+        print("\n❌ Build interrupted by user")
+        return False
+
 def main():
     """Main build function with menu."""
     print("🔥 Nuitka Build System for Desalter")
@@ -130,19 +196,22 @@ def main():
 
     print("\nSelect build option:")
     print("1. 🚀 Standalone + Onefile (Recommended)")
-    print("2. 🔧 Minimal build")
-    print("3. 🐛 Debug build")
+    print("2. 🛡️ Antivirus Safe Build (No compression)")
+    print("3. 🔧 Minimal build")
+    print("4. 🐛 Debug build")
     print("=" * 50)
 
-    choice = input("Enter choice (1-3): ").strip()
+    choice = input("Enter choice (1-4): ").strip()
 
     success = False
 
     if choice == "1":
         success = build_nuitka_standalone()
     elif choice == "2":
-        success = build_nuitka_minimal()
+        success = build_antivirus_safe()
     elif choice == "3":
+        success = build_nuitka_minimal()
+    elif choice == "4":
         success = build_nuitka_debug()
     else:
         print("❌ Invalid choice")

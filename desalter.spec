@@ -5,6 +5,42 @@ from pathlib import Path
 # Get the project root directory
 project_root = Path(SPEC).parent
 
+# Version info for antivirus compatibility
+version_info = """
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(1, 0, 0, 0),
+    prodvers=(1, 0, 0, 0),
+    mask=0x3f,
+    flags=0x0,
+    OS=0x4,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+  ),
+  kids=[
+    StringFileInfo(
+      [
+        StringTable(
+          u'040904B0',
+          [
+            StringStruct(u'CompanyName', u'Desalter Solutions'),
+            StringStruct(u'FileDescription', u'Oil and Gas Desalter Optimization Tool'),
+            StringStruct(u'FileVersion', u'1.0.0.0'),
+            StringStruct(u'InternalName', u'desalter'),
+            StringStruct(u'LegalCopyright', u'Copyright (c) 2024 Desalter Solutions'),
+            StringStruct(u'OriginalFilename', u'desalter.exe'),
+            StringStruct(u'ProductName', u'Desalter Oil Processing Tool'),
+            StringStruct(u'ProductVersion', u'1.0.0')
+          ]
+        )
+      ]
+    ),
+    VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
+  ]
+)
+"""
+
 # Define the analysis
 a = Analysis(
     ['launcher.py'],
@@ -127,7 +163,7 @@ exe = EXE(
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=True,
+    upx=False,  # Disable UPX compression to avoid AV detection
     upx_exclude=[],
     runtime_tmpdir=None,
     console=True,
@@ -136,4 +172,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    # Add version info to reduce false positives
+    version='version_info.txt',
+    icon='frontend/assets/Logo.jpg'
 )

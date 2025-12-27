@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  desalter:
+    ports:
+      - "8000"  # Remove host port binding, only expose internally
+    networks:
+      - desalter_network
+
+  nginx:
+    build:
+      context: ../..
+      dockerfile: infra/docker/nginx/Dockerfile
+    container_name: desalter_nginx
+    ports:
+      - "127.0.0.1:80:80"
+      - "127.0.0.1:443:443"
+    depends_on:
+      - desalter
+    restart: always
+    networks:
+      - desalter_network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+networks:
+  desalter_network:
+    driver: bridge
+
