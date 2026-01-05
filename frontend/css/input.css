@@ -138,9 +138,8 @@ body {
 }
 
 .header-icon {
-  width: 6rem;
+  width: 6.5rem;
   height: 6rem;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   border-radius: var(--radius-xl);
   display: flex;
   align-items: center;

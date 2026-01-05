@@ -19,6 +19,8 @@ async def serve_asset(filename: str):
             return FileResponse(file_path, media_type='video/mp4')
         elif filename.endswith(('.jpg', '.jpeg')):
             return FileResponse(file_path, media_type='image/jpeg')
+        elif filename.endswith('.png'):
+            return FileResponse(file_path, media_type='image/png')
         elif filename.endswith('.svg'):
             return FileResponse(file_path, media_type='image/svg+xml')
     return JSONResponse({"error": "File not found"}, status_code=404)
@@ -30,11 +32,6 @@ app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
 @app.api_route("/", methods=["GET", "HEAD"])
 async def read_root():
     return FileResponse(FRONTEND_DIR / "html" / "index.html", media_type="text/html")
-
-# Serve the login page
-@app.api_route("/login", methods=["GET", "HEAD"])
-async def read_login():
-    return FileResponse(FRONTEND_DIR / "html" / "login.html", media_type="text/html")
 
 # Serve the input page
 @app.api_route("/input", methods=["GET", "HEAD"])

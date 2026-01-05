@@ -53,7 +53,7 @@ def sync_static():
             # Read and fix navigation paths in JS files
             content = js_file.read_text(encoding='utf-8')
             # Fix navigation paths for GitHub Pages
-            content = content.replace("window.location.href = '/login'", "window.location.href = './login.html'")
+            content = content.replace("window.location.href = '/input'", "window.location.href = './input-page.html'")
             content = content.replace("window.location.href = '/input'", "window.location.href = './input-page.html'")
             content = content.replace("window.location.href = '/results'", "window.location.href = './result.html'")
             

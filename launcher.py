@@ -156,10 +156,10 @@ def main():
         # Start uvicorn server directly
         log.info("Starting uvicorn server...")
         uvicorn.run(
-            app,
+            "backend.main:app",
             host="127.0.0.1",
             port=port,
-            reload=False,
+            reload=True,
             log_level="info",
             access_log=True
         )

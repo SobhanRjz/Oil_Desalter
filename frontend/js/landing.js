@@ -50,8 +50,11 @@ cta?.addEventListener('click', (e) => {
   cta.classList.add('loading');
   cta.textContent = 'Loading...';
 
-  // Navigate to login page after a short delay for smooth UX
+  console.log('Get Started clicked - navigating to /input');
+
+  // Navigate to input page after a short delay for smooth UX
   setTimeout(() => {
-    window.location.href = '/login';
+    console.log('Navigating to /input now');
+    window.location.href = '/input';
   }, 800);
 });
